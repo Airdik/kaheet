@@ -16,10 +16,13 @@ function notify() {
 
 
 // -------------------------- getInput -------------------------- //
-// Get input from user
-// Show instructions
+/**
+ * Prompts user for quiz id
+ * from host's screen.
+ * @returns The user's input or a rejection on empty input
+ */
 
-function getInput() {
+ function getInput() {
     return new Promise((resolve, reject) => {
         let input = prompt(`
 📜 Enter the last part of link, that's visible on the teacher's screen.
@@ -30,11 +33,9 @@ function getInput() {
 ⚠️  Getting answers by quiz join code is not supported yet
 ⚠️  Kaheet is 100% safe, which means it's not a virus or crap like that
 ❌ TO EXIT CLICK F5
-            `);
-        input.trim() !== "" ? resolve(input) : reject('Empty input');
+            `).trim() !== "" ? resolve(input) : reject('Empty input');
     });
 }
-// -------------------------- getInput -------------------------- //
 
 
 
@@ -74,20 +75,28 @@ function checkInput(input) {
 
 
 // -------------------------- parse -------------------------- //
-// Parse answers, questions and other data
+/**
+ * Is passed in json question data,
+ * Parses each question and converts them
+ * into a new questionData object, then stores
+ * in an array and returns
+ * @param {*} json 
+ * @returns An array of parsed questionData objects
+ */
 
-function parse(json) {
+ function parse(json) {
     return new Promise((resolve) => {
         let returnData = [];
         let questions = json.questions;
 
+        //Loop through each question
         questions.forEach(question => {
             questionData = {
-                question: question.question,
-                type: question.type,
-                answers: [],
-                check: [],
-                correct: [],
+                question: question.question, //Question Prompt
+                type: question.type, //Type of Question
+                answers: [], //Text Form of the answer
+                check: [], //Indexs of wrong choices
+                correct: [], //Index of correct answer(s) (could have more than one correct answer)
                 skip: false
             }
 
@@ -100,6 +109,8 @@ function parse(json) {
             }
 
             if (question.choices)
+            {
+                //Loop through each choice in the question
                 question.choices.forEach((choice, index) => {
                     if (choice.correct) {
                         questionData.correct.push(index);
@@ -111,23 +122,23 @@ function parse(json) {
                     } else
                         questionData.check.push(index);
                 });
-
+            }
+                
+            //Push parsed data object to returnData Array
             returnData.push(questionData);
         });
+
         answersToConsole(returnData);
+
         if (quizType === "challenge") {
-            alert(`Ugh! We've detected, that you're running challenge mode!
-For all answers, you have to check the console!`);
-            alert(`If you want to have time to search current question,
-you can pause quiz timers by typing 'pause()' in console!`);
+            alert(`Ugh! We've detected, that you're running challenge mode! \nFor all answers, you have to check the console!`);
+            alert(`If you want to have time to search current question, \nyou can pause quiz timers by typing 'pause()' in console!`);
             resolve(true)
         } else {
             resolve(returnData);
         }
     });
 }
-// -------------------------- parse -------------------------- //
-
 
 
 
@@ -227,22 +238,27 @@ function highlight(data) {
 
 
 // -------------------------- pause -------------------------- //
-// Pause quiz timers
-
-function pause() {
+/**
+ * Alerts the user they paused the game timer
+ */
+ function pause() {
     alert(`Now you can search your question without loosing time!
 Remember, that teacher can see illegal time!
 To resume, click 'OK' below`)
 }
-// -------------------------- pause -------------------------- //
 
 
 
 
 // -------------------------- answersToConsole -------------------------- //
-// Show answers in console
-
-function answersToConsole(json) {
+/**
+ * Loops through each question(from the json)
+ * Prints in the console the question prompt,
+ * the number of answers, then the answers.
+ * Styles the answers too.
+ * @param {*} json 
+ */
+ function answersToConsole(json) {
     json.forEach(question => {
         if (!question.skip) {
             console.log(`
@@ -256,7 +272,7 @@ function answersToConsole(json) {
         }
     });
 }
-// -------------------------- answersToConsole -------------------------- //
+
 
 
 
@@ -389,4 +405,3 @@ function theme() {
     console.log(`If you want to have time to search current question,
 you can pause quiz timers by typing 'pause()' in console!`)
 })();
-// -------------------------- init -------------------------- //
