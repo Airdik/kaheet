@@ -1,8 +1,10 @@
 let quizType;
 
-/**
- * Notifies the user with a welcome text
- */
+//Test :)
+
+// -------------------------- notify -------------------------- //
+// Show welcome notification
+
 function notify() {
     console.clear();
     console.log(`%c\nKaheet made by pxtrez\nIt's only cheating if you get caught.`, "color:#ff66ff");
