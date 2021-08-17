@@ -1,15 +1,15 @@
 let quizType;
 
-// -------------------------- notif -------------------------- //
-// Show welcome notification
-
-function notif() {
+/**
+ * Notifies the user with a welcome text
+ */
+function notify() {
     console.clear();
-    console.log(`%c\nKaheet made by pxtrez\n`, "color:#ff66ff");
-    console.log(`Thank you for using Kaheet! I recommend that you read the docs before use!\nhttps://pxtrez.github.io/kaheet/\nPheaServices © 2021\nEducational purposes only!`);
-    alert(`Thank you for using Kaheet!\nI recommend reading the docs before using!\nhttps://pxtrez.github.io/kaheet/\nPheaServices © 2021`);
+    console.log(`%c\nKaheet made by pxtrez\nIt's only cheating if you get caught.`, "color:#ff66ff");
+    let s = `Thank you for using Kaheet! I recommend that you read the docs before use!\nhttps://pxtrez.github.io/kaheet/\nPheaServices © 2021\nEducational purposes only!`;
+    console.log(s);
+    alert(s);
 }
-// -------------------------- notif -------------------------- //
 
 
 
@@ -38,21 +38,20 @@ function getInput() {
 
 
 
-// -------------------------- checkInput -------------------------- //
-// Check quizID
-
+/**
+ * Checks quiz ID
+ * @param {*} input 
+ * @returns 
+ */
 function checkInput(input) {
     return new Promise(async(resolve, reject) => {
-        const kahoot = await fetch(`https://kahoot.it/rest/kahoots/${input}`);
+        const kahoot = await fetch(`https://kahoot.it/rest/kahoots/${input}`); // Trying to find the Kahoot game by input (Game ID)
 
-        if (!kahoot.ok || kahoot.status === 400) {
-            const challenge = await fetch(
-                `https://kahoot.it/rest/challenges/${input}/answers`
-            );
+        if (!kahoot.ok || kahoot.status === 400) { // Checking if the fetch is not ok
+            const challenge = await fetch(`https://kahoot.it/rest/challenges/${input}/answers`);
             const json = await challenge.json();
 
-            if (!challenge.ok ||
-                challenge.status === 400
+            if (!challenge.ok || challenge.status === 400
             ) {
                 console.log(`⚠️  Error: QuizID not found!`);
                 return reject('QuizID not found');
@@ -68,7 +67,6 @@ function checkInput(input) {
         }
     });
 }
-// -------------------------- checkInput -------------------------- //
 
 
 
@@ -133,7 +131,12 @@ you can pause quiz timers by typing 'pause()' in console!`);
 
 // -------------------------- highlight -------------------------- //
 // Show correct answers
-
+/**
+ * Gets data from array of data from parse
+ * Goes through parse data and styles accordingly
+ * 
+ * @param {*} data 
+ */
 function highlight(data) {
     if (typeof data === 'boolean') return;
 
@@ -179,7 +182,8 @@ function highlight(data) {
 
                     if (document.querySelector(
                             `[data-functional-selector="answer-1"]`
-                        ) !== null) {
+                    ) !== null) {
+                        // For each invalid answer, turning it black
                         check.forEach(i => {
                             let element = document.querySelector(
                                 `[data-functional-selector="answer-${i}"]`
@@ -191,6 +195,7 @@ function highlight(data) {
                             }
                         });
 
+                        // For each correct answer, turning it lime green
                         correct.forEach(i => {
                             let element = document.querySelector(
                                 `[data-functional-selector="answer-${i}"]`);
@@ -215,7 +220,6 @@ function highlight(data) {
         }
     }, 50);
 }
-// -------------------------- highlight -------------------------- //
 
 
 
@@ -257,8 +261,12 @@ function answersToConsole(json) {
 
 
 // -------------------------- doFunc -------------------------- //
-// Check if element exists and do function
-
+/**
+ * Gets passed in elements and styles, and applies the styles to the elements
+ * 
+ * @param {*} selector - the elements being styled
+ * @param {*} functions - the style getting applied to the element
+ */
 function doFunc(selector, functions) {
     // You can modify this values
     let main = "black";
@@ -273,22 +281,22 @@ function doFunc(selector, functions) {
         });
     };
 }
-// -------------------------- doFunc -------------------------- //
 
 
 
 
 
 // -------------------------- theme -------------------------- //
-// Change kahoot theme
-
+/**
+ * Changes the kahoot theme
+ */
 function theme() {
     let elements = {
-        nameholder: {
-            elems: [
+        nameholder: { // Name
+            elems: [ // What element
                 '[data-functional-selector="nickname-status-bar"]'
             ],
-            do: [
+            do: [ // What style to do the the element
                 "element.innerHTML = 'Kaheet has been injected!'",
             ]
         },
@@ -358,17 +366,17 @@ function theme() {
         });
     });
 }
-// -------------------------- theme -------------------------- //
 
 
 
 
 // -------------------------- init -------------------------- //
-// Trigger functions
-
+/**
+ * Staring point of the code
+ */
 (async() => {
     theme();
-    notif();
+    notify();
 
     const input = await getInput();
     const json = await checkInput(input);
