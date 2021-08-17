@@ -1,5 +1,7 @@
 let quizType;
 
+//Test :)
+
 // -------------------------- notif -------------------------- //
 // Show welcome notification
 
