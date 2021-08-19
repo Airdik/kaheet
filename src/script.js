@@ -21,7 +21,6 @@ function notify() {
  * from host's screen.
  * @returns The user's input or a rejection on empty input
  */
-
  function getInput() {
     return new Promise((resolve, reject) => {
         let input = prompt(`
