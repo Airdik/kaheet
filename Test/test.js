@@ -10,7 +10,6 @@
 
 console.log("////STARTING TESTS////")
 
-const body = document.getElementsByTagName('body');
 const testId = 'b363f7e6-5bd5-4e4c-8bea-250868a2a12d';
 
 async function testCheckInput() {
@@ -44,10 +43,10 @@ function testParse() {
         console.log("STARTING TEST");
         let output = await checkInput(testId);
         console.log(output);
-        alert("STOPPED");
     }
 
     testInput();
+};
 
 });
 */
