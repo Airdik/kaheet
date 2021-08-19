@@ -15,43 +15,33 @@ const testId = 'b363f7e6-5bd5-4e4c-8bea-250868a2a12d';
 async function testCheckInput() {
 
     console.log("TEST: CheckInput")
-    let json = await checkInput(testId);
-    let isValid = json != 'QuizID not found';
-
-    console.log(`CheckInput: ${isValid}`);
-}
-
-/*
-function testParse() {
     
-
-
-    body.innerHTML = '';
+    await checkInput(testId)
+    .then(function(value){ //If gets back a resolve promise (no error)
+        console.log("UNIT TEST(CheckInput): Success");
+    }).catch((error) => { //If gets back a reject promise (error)
+        console.error("UNIT TEST(CheckInput): Failed");
+    });
 }
 
+async function testParse() {
+    
+    await checkInput(testId)
+    .then(function(value){
 
-////// Call all functions
+        parse(value).then(function(value2){
+          console.log("UNIT TEST(Parse): Success");
+        });
 
-
-
-(async() => {
-
-    const testId = 'b363f7e6-5bd5-4e4c-8bea-250868a2a12d';
-    console.log("HELLO");
-
-    async function testInput(){
-        console.log("STARTING TEST");
-        let output = await checkInput(testId);
-        console.log(output);
-    }
-
-    testInput();
-};
-
-});
-*/
+    }).catch((error) => {
+        console.error("UNIT TEST(Parse): Failed");
+    });
+}
 
 
 
 /////////////////////// CALLING TESTS
 testCheckInput();
+testParse();
+
+console.log("////END TESTS")
