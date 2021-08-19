@@ -404,3 +404,6 @@ function theme() {
     console.log(`If you want to have time to search current question,
     you can pause quiz timers by typing 'pause()' in console!`)
 })();
+
+
+

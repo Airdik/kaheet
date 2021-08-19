@@ -7,24 +7,28 @@
 // }
 
 // temp();
-/*
+
+console.log("////STARTING TESTS////")
+
 const body = document.getElementsByTagName('body');
 const testId = 'b363f7e6-5bd5-4e4c-8bea-250868a2a12d';
 
 async function testCheckInput() {
 
+    console.log("TEST: CheckInput")
     let json = await checkInput(testId);
     let isValid = json != 'QuizID not found';
 
-    body.innerHTML = `CheckInput: ${isValid}`;
+    console.log(`CheckInput: ${isValid}`);
 }
 
+/*
 function testParse() {
     
 
 
     body.innerHTML = '';
-}*/
+}
 
 
 ////// Call all functions
@@ -46,3 +50,9 @@ function testParse() {
     testInput();
 
 });
+*/
+
+
+
+/////////////////////// CALLING TESTS
+testCheckInput();
