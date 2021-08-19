@@ -1,3 +1,4 @@
+console.log("TEST");
 (async() => {
 
     const testId = 'b363f7e6-5bd5-4e4c-8bea-250868a2a12d';
