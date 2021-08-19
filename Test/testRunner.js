@@ -1,10 +1,14 @@
 
 
-(async () => {
-    let file1 = await fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/script.js");
-    let file2 = await fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/test.js");
 
-    return (file1 + ' ' + file2);
-})();
+let allFiles = 
+fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/script.js")
+    .then((r) => r.text()
+        .then((t) =>
+            fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/test.js")
+                .then((r2) => r2.text()
+                    .then((t2) => allFiles = (t + t2)))));
+
+
 
 
