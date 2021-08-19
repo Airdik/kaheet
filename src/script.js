@@ -386,22 +386,27 @@ function theme() {
 }
 
 
-
-
+var debug = true;
 // -------------------------- init -------------------------- //
 /**
  * Staring point of the code
  */
+if (!debug) {
 (async() => {
     theme();
     notify();
 
+        
     const input = await getInput();
     const json = await checkInput(input);
     const parsed = await parse(json);
-
+    
     highlight(parsed);
-
+    
     console.log(`If you want to have time to search current question,
-you can pause quiz timers by typing 'pause()' in console!`)
+    you can pause quiz timers by typing 'pause()' in console!`)
 })();
+}
+else {
+    console.log("IN DEBUG MODE");
+}
