@@ -1,7 +1,5 @@
 
 
-
-let allFiles = 
 fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/script.js")
     .then((r) => r.text()
         .then((t) =>
