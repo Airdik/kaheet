@@ -41,7 +41,7 @@ async function TEST(func) {
     console.group(`%c TESTING: ${func.name}`, "color:Coral;");
     console.time(`${func.name}`);
 
-    await func().then(function (a) {
+    func().then(function (a) {
         console.groupCollapsed(`%c ${func.name}: PASSED`, "color: Chartreuse;");
         console.timeEnd(`${func.name}`);
         console.groupEnd();
