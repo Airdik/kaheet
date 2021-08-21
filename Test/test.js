@@ -57,9 +57,10 @@ async function TEST(func) {
 
 
 //////////      CALLING ALL TESTS       //////////
-console.log("%c ========STARTING TESTS========\n", "color: Yellow;")
+console.group("%c ========STARTING TESTS========\n", "color: Yellow;")
 TEST(testCheckInput);
 TEST(testParse);
 
 
 console.log("%c \n=========END OF TESTS=========", "color: Yellow;")
+console.groupEnd();

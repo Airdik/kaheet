@@ -30,6 +30,7 @@ function createBubble() {
     width: 25 %;
     color: white;
     text-align: center;
+    padding-top:12px;
     `
     );
 
