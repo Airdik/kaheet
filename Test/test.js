@@ -1,10 +1,10 @@
 const testId = 'b363f7e6-5bd5-4e4c-8bea-250868a2a12d';
 
-function testCheckInput() {
+async function testCheckInput() {
 
     return new Promise(function (resolve, reject) {
 
-        checkInput(testId)
+        await checkInput(testId)
             .then(function (value) { //If gets back a resolve promise (no error)
                 resolve(true);
             }).catch((error) => { //If gets back a reject promise (error)
@@ -15,9 +15,9 @@ function testCheckInput() {
     
 }
 
-function testParse() {
+async function testParse() {
     return new Promise(function (resolve, reject) {
-        checkInput(testId)
+        await checkInput(testId)
             .then(function (value) {
 
                 parse(value).then(function (value2) {
