@@ -1,47 +1,65 @@
-// function temp() {
-//     let num1 = 2;
-//     let num2 = 8;
-//     let expected = 10;
-//     let isValid = add(num1, num2) == expected;
-//     console.log("Add ", isValid));
-// }
-
-// temp();
-
-console.log("////STARTING TESTS////")
-
 const testId = 'b363f7e6-5bd5-4e4c-8bea-250868a2a12d';
 
-async function testCheckInput() {
+function testCheckInput() {
 
-    console.log("TEST: CheckInput")
-    
-    await checkInput(testId)
-    .then(function(value){ //If gets back a resolve promise (no error)
-        console.log("UNIT TEST(CheckInput): Success");
-    }).catch((error) => { //If gets back a reject promise (error)
-        console.error("UNIT TEST(CheckInput): Failed");
+    return new Promise(function (resolve, reject) {
+
+        checkInput(testId)
+            .then(function (value) { //If gets back a resolve promise (no error)
+                resolve(true);
+            }).catch((error) => { //If gets back a reject promise (error)
+                reject(error);
+            });
+
     });
+    
 }
 
-async function testParse() {
-    
-    await checkInput(testId)
-    .then(function(value){
+function testParse() {
+    return new Promise(function (resolve, reject) {
+        checkInput(testId)
+            .then(function (value) {
 
-        parse(value).then(function(value2){
-          console.log("UNIT TEST(Parse): Success");
-        });
+                parse(value).then(function (value2) {
+                    resolve(true);
+                });
 
-    }).catch((error) => {
-        console.error("UNIT TEST(Parse): Failed");
+            }).catch((error) => {
+                reject(error);
+            });
+
     });
+    
 }
 
 
 
-/////////////////////// CALLING TESTS
-testCheckInput();
-testParse();
+//////////             //////////
 
-console.log("////END TESTS")
+async function TEST(func) {
+
+    console.group(`%c TESTING: ${func.name}`, "color:Coral;");
+    console.time(`${func.name}`);
+
+    await func().then(function (a) {
+        console.groupCollapsed(`%c ${func.name}: PASSED`, "color: Chartreuse;");
+        console.timeEnd(`${func.name}`);
+        console.groupEnd();
+    }).catch((err) => {
+        console.groupCollapsed(`%c ${func.name}: FAILED`, "color: Red;");
+        console.log("%c" + err, "color:DeepPink;");
+        console.timeEnd(`${func.name}`);
+        console.groupEnd();
+    });
+    console.groupEnd();
+}
+
+
+
+//////////      CALLING ALL TESTS       //////////
+console.log("%c ========STARTING TESTS========\n", "color: Yellow;")
+await TEST(testCheckInput);
+await TEST(testParse);
+
+
+console.log("%c \n=========END OF TESTS=========", "color: Yellow;")
