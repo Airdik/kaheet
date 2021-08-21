@@ -38,9 +38,7 @@ async function testParse() {
 
 async function TEST(func) {
 
-    console.group(`%c TESTING: ${func.name}`, "color:Coral;");
     console.time(`${func.name}`);
-
     await func().then(function (a) {
         console.groupCollapsed(`%c ${func.name}: PASSED`, "color: Chartreuse;");
         console.timeEnd(`${func.name}`);
@@ -51,16 +49,11 @@ async function TEST(func) {
         console.timeEnd(`${func.name}`);
         console.groupEnd();
     });
-    console.groupEnd();
 }
 
 
 
 //////////      CALLING ALL TESTS       //////////
-console.group("%c ========STARTING TESTS========\n", "color: Yellow;")
+console.log("%c ========STARTING TESTS========\n", "color: Yellow;")
 TEST(testCheckInput);
 TEST(testParse);
-
-
-console.log("%c \n=========END OF TESTS=========", "color: Yellow;")
-console.groupEnd();

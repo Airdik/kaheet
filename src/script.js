@@ -31,7 +31,7 @@ function notify() {
 ⚠️  Kaheet is 100% safe, which means it's not a virus or crap like that
 ❌ TO EXIT CLICK F5
            `);
-        input.trim() !== "" ? resolve(input) : reject('Empty input');
+        if (input) { input.trim() !== "" ? resolve(input) : reject('Empty input'); }else{ reject('No input');}
     });
 }
 
@@ -54,15 +54,15 @@ function checkInput(input) {
 
             if (!challenge.ok || challenge.status === 400
             ) {
-                console.log(`⚠️  Error: QuizID not found!`);
+                //--console.log(`⚠️  Error: QuizID not found!`);
                 return reject('QuizID not found');
             } else {
                 quizType = "challenge";
-                console.log(`✔️  QuizID found!`);
+                //--console.log(`✔️  QuizID found!`);
                 resolve(json.challenge.kahoot);
             }
         } else {
-            console.log(`✔️  QuizID found!`);
+            //--console.log(`✔️  QuizID found!`);
             const json = await kahoot.json();
             resolve(json);
         }
@@ -126,7 +126,7 @@ function checkInput(input) {
             returnData.push(questionData);
         });
 
-        answersToConsole(returnData);
+        //--answersToConsole(returnData);
 
         if (quizType === "challenge") {
             alert(`Ugh! We've detected, that you're running challenge mode! \nFor all answers, you have to check the console!`);
