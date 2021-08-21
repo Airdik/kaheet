@@ -4,7 +4,7 @@ async function testCheckInput() {
 
     return new Promise(function (resolve, reject) {
 
-        await checkInput(testId)
+        checkInput(testId)
             .then(function (value) { //If gets back a resolve promise (no error)
                 resolve(true);
             }).catch((error) => { //If gets back a reject promise (error)
@@ -17,7 +17,7 @@ async function testCheckInput() {
 
 async function testParse() {
     return new Promise(function (resolve, reject) {
-        await checkInput(testId)
+        checkInput(testId)
             .then(function (value) {
 
                 parse(value).then(function (value2) {
