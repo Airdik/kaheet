@@ -58,8 +58,8 @@ async function TEST(func) {
 
 //////////      CALLING ALL TESTS       //////////
 console.log("%c ========STARTING TESTS========\n", "color: Yellow;")
-TEST(testCheckInput);
-TEST(testParse);
+await TEST(testCheckInput);
+await TEST(testParse);
 
 
 console.log("%c \n=========END OF TESTS=========", "color: Yellow;")
