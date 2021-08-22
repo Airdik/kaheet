@@ -11,7 +11,7 @@ function createBubble() {
     // Styling the bubble, <div>
     //TEMP: Kahoot color: #46178f
     bubble.setAttribute(`style`,
-        `background-color:#fcc600;
+        `background-color:#ffde34;
     height: 50px;
     width: 50px;
     position: fixed;
@@ -62,12 +62,13 @@ function expandBubble() {
         `position: fixed;
         width:${width}px;
         height:${height}px;
-        background-color:#fcc600;
+        background-color:#ffde34;
         border-radius: 22px 22px 5px 22px;
         z-index: 1001;
         margin: auto;
         bottom: 5px;
         right: 5px;
+        align-items:center;
         `
     );
 
@@ -106,11 +107,26 @@ function expandBubble() {
 }
 
 function askForPin(bubbleClone) {
+    let mainDiv = document.createElement('div');
     let inputBox = document.createElement('input');
     let tryButton = document.createElement('button');
-    tryButton.innerHTML = "Connect";
-    tryButton.id = "tryButton";
+    mainDiv.id = "mainDiv";
     inputBox.id = "inputBox";
+    tryButton.id = "tryButton";
+    tryButton.innerHTML = "Connect";
+
+    // Styling main div
+    mainDiv.setAttribute(`style`,
+        `
+        position:absolute;
+        top:70px;
+        left:0;
+        height:280px;
+        width:100%;
+        border-radius: 0px 0px 22px 22px;
+    
+        `
+    )
 
     // Styling button
     inputBox.setAttribute(`style`,
@@ -159,8 +175,10 @@ function askForPin(bubbleClone) {
     tryButton.addEventListener("mouseover", (e) => { tryButton.style.cursor = "pointer"; });
     tryButton.addEventListener("click", validatePin);
 
-    bubbleClone.append(inputBox);
-    bubbleClone.append(tryButton);
+    mainDiv.append(inputBox);
+    mainDiv.append(tryButton)
+
+    bubbleClone.append(mainDiv);
 }
 
 function validatePin() {
@@ -206,13 +224,15 @@ function addMinimizeButton(bubbleClone) {
 function addInfoBox(bubbleClone) {
     let infoBox = document.createElement('div');
     infoBox.id = "infoBox";
+    let infoText = document.createElement('p');
+    infoText.id = "infoText";
 
 
-    // Styling button
+    // Styling info box
     infoBox.setAttribute(`style`,
         `
         margin:0;
-        background-color:pink;
+        background-color:#fcc600;
         position: absolute;
         left:0;
         top:0;
@@ -221,22 +241,40 @@ function addInfoBox(bubbleClone) {
         z-index:1002;
         border-radius: 22px 22px 5px 5px;
         text-align: center;
-        font-size: 20px;
         user-select:none;
-        color:white;
+        font-family: helvetica;
         `
-    )
+    );
+
+    // Styling info infoText
+    infoText.setAttribute(`style`,
+        `
+        margin-top:0px;
+        padding-top:5px;
+        position: relative;
+        left:0;
+        width:210px;
+        border-radius: 22px 0px 0px 0px;
+        font-size: 18px;
+        font-weight: bold;
+        color:black;
+    
+        `
+    );
+
+
 
     bubbleClone.append(infoBox);
+    infoBox.append(infoText);
     displayMessage("Welcome!")
 }
 
 
 
 function displayMessage(message) {
-    document.getElementById("infoBox").innerHTML = "";
-    document.getElementById("infoBox").innerHTML = message;
+    document.getElementById("infoText").innerHTML = message;
 }
+
 function closeBubble() {
     console.log("Closing Remote")
 
