@@ -52,10 +52,25 @@ function createBubble() {
 function expandBubble() {
     console.log(`Bubble was clicked`);
 
-    const bubble = document.getElementById(`bubble`); // Getting the original bubble div
-    const bubbleClone = bubble.cloneNode(true); // Cloning bubble into bubbleClone
+    const mainDiv = document.createElement("div");
+    mainDiv.id = "mainDiv";
+    // Styling main div
+    mainDiv.setAttribute(`style`,
+        `
+        position:absolute;
+        top:70px;
+        left:0;
+        height:280px;
+        width:100%;
+        border-radius: 0px 0px 22px 22px;
+    
+        `
+    );
+
+    let bubble = document.getElementById(`bubble`); // Getting the original bubble div
+    let bubbleClone = bubble.cloneNode(true); // Cloning bubble into bubbleClone
     bubbleClone.id = `bubbleClone`; // Changing cloned bubble to bubbleClone
-    const { width, height } = bubble.getBoundingClientRect(); // Getting Original bubbles width and height
+    let { width, height } = bubble.getBoundingClientRect(); // Getting Original bubbles width and height
 
     // Cloning each setAttribute from original bubble to the clone bubble
     bubbleClone.setAttribute(`style`,
@@ -93,6 +108,7 @@ function expandBubble() {
     });
 
     bubbleClone.innerHTML = ''; // Removing all child elements form clone bubble;
+    bubbleClone.append(mainDiv); // Adding main div to the page after the bubble is expanded
 
 
     //// Adding children
@@ -107,26 +123,14 @@ function expandBubble() {
 }
 
 function askForPin(bubbleClone) {
-    let mainDiv = document.createElement('div');
+    let mainDiv = document.getElementById('mainDiv');
     let inputBox = document.createElement('input');
     let tryButton = document.createElement('button');
-    mainDiv.id = "mainDiv";
     inputBox.id = "inputBox";
     tryButton.id = "tryButton";
     tryButton.innerHTML = "Connect";
 
-    // Styling main div
-    mainDiv.setAttribute(`style`,
-        `
-        position:absolute;
-        top:70px;
-        left:0;
-        height:280px;
-        width:100%;
-        border-radius: 0px 0px 22px 22px;
-    
-        `
-    )
+ 
 
     // Styling button
     inputBox.setAttribute(`style`,
@@ -184,6 +188,8 @@ function askForPin(bubbleClone) {
 function validatePin() {
     let pin = document.getElementById("inputBox").value;
     console.log("Pin entered: ", pin);
+    addGoToRawButton();
+    viewAllQnA();
 
     checkInput(pin).then((a) => {
         isPublic = true;
@@ -196,7 +202,6 @@ function validatePin() {
 function addMinimizeButton(bubbleClone) {
     let button = document.createElement('div');
     button.innerHTML = "❌";
-
 
     // Styling button
     button.setAttribute(`style`,
@@ -274,6 +279,10 @@ function addInfoBox(bubbleClone) {
 function displayMessage(message) {
     document.getElementById("infoText").innerHTML = message;
 }
+function clearMainDiv() {
+    let mainDiv = document.getElementById("mainDiv");
+    mainDiv.innerHTML = "";
+}
 
 function closeBubble() {
     console.log("Closing Remote")
@@ -284,7 +293,77 @@ function closeBubble() {
     bubble.style.opacity = `1`;
 }
 
+function addGoToRawButton() {
+    console.log("Adding QnA button");
+    let bubbleClone = document.getElementById("bubbleClone");
+    //inside of create list box
+    let goToRawBtn = document.createElement("div");
+    goToRawBtn.id = "goToRawBtn";
+    goToRawBtn.innerHTML = "📑";
 
+    goToRawBtn.setAttribute(`style`,
+        `
+        top: 30;
+        left:210px;
+        position: relative;
+        width:40px;
+        height: 30px;
+        z-index:1003;
+        border-radius: 5px 22px 5px 0px;
+        text-align: center;
+        font-size: 20px;
+        padding-top: 0px;
+        user-select:none;
+        `
+    );
+
+    goToRawBtn.addEventListener("mouseover", (e) => { goToRawBtn.style.cursor = "pointer"; });
+    //goToRawBtn.addEventListener("click", openModesPage);
+
+    bubbleClone.append(goToRawBtn);
+        
+}
+
+function viewAllQnA(json) {
+    clearMainDiv();
+    let mainDiv = document.createElement("mainDiv");
+
+    // Takes you back to the select modes page where all of the lists are.
+    let goBackToModesBtn = document.createElement("div");
+    goBackToModesBtn.id = "goBackToModesBtn";
+    goBackToModesBtn.id = innerHTML = "👈";
+
+    goBackToModesBtn.setAttribute(`style`,
+        `
+        top: 30;
+        left:210px;
+        position: relative;
+        width:40px;
+        height: 30px;
+        z-index:1003;
+        border-radius: 5px 22px 5px 0px;
+        text-align: center;
+        font-size: 20px;
+        padding-top: 10px;
+        user-select:none;
+        `
+    );
+
+
+
+    // parse json DATA
+    for (let i = 0; i < json.length; i++) {
+        let Q = json[i][0];
+        let A = json[i][1];
+        let qnaText = document.createElement("p");
+        qnaText.className = "qnaText";
+        qnaText.innerHTML = `${i+1}) ${Q} | ${A}`;
+        mainDiv.append(qnaText);
+    }
+
+    // Style by class name here
+
+}
 
 
 
