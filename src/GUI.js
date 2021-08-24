@@ -1,4 +1,4 @@
-let isPublic = false;
+let isPublic = true;
 
 // Creating the tool bubble
 function createBubble() {
@@ -115,10 +115,116 @@ function expandBubble() {
     addMinimizeButton(bubbleClone);
     addInfoBox(bubbleClone);
     if (isPublic) {
+        addGoToRawButton();
+        addSwitch(mainDiv, "Incognito");
+        addSwitch(mainDiv, "Shuffle");
+        addSwitchStyling();
 
-        //addListBox(bubbleClone);
+        //addAccordClickEvents();
+        //addAccordStyling();
     } else {
         askForPin(bubbleClone);
+    }
+}
+
+function addSwitch(mainDiv, name){
+    let switchDiv = document.createElement('div');
+    switchDiv.className = "switch";
+
+    let switchText = document.createElement('div');
+    switchText.className = "switchText"
+    switchText.innerText = name;
+
+    //ToggleBtns are just name + Toggle
+    let toggleBtn = document.createElement('input');
+    toggleBtn.id = `${name}Toggle}`;
+    toggleBtn.className = "toggleBtn";
+    toggleBtn.type = "checkbox";
+
+    switchDiv.appendChild(switchText);
+    switchDiv.appendChild(toggleBtn);
+
+    mainDiv.appendChild(switchDiv);
+}
+
+function addSwitchStyling(){
+    let switches = document.getElementsByClassName("switch");
+    let i = 0;
+    for(i; i < switches.length; i++){
+        switches[i].style.backgroundColor = "#fff";
+        switches[i].style.width = "100%";
+        switches[i].style.paddingTop = "0.5em";
+        switches[i].style.paddingBottom = "0.5em";
+        switches[i].style.borderBottom = "solid gray 1px";
+    }
+
+    let switchTexts = document.getElementsByClassName("switchText");
+    for(i = 0; i < switchTexts.length; i++){
+        switchTexts[i].style.display = "inline";
+    }
+
+    let toggleBtns = document.getElementsByClassName("toggleBtn");
+    for(i = 0; i < toggleBtns.length; i++){
+        toggleBtns[i].style.float = "right";
+        toggleBtns[i].style.marginRight = "1em";
+    }
+}
+
+function addAccordion(mainDiv, name){
+
+    let accord = document.createElement('div');
+    accord.className = "accordion";
+
+    let accordText = document.createElement('div');
+    accordText.className = "accordText"
+    accordText.innerText = name;
+
+    let panel = document.createElement('div');
+    panel.className = "panel";
+
+    //ToggleBtns are just name + Toggle
+    let toggleBtn = document.createElement('input');
+    toggleBtn.id = `${name}Toggle}`;
+    toggleBtn.type = "checkbox";
+
+    panel.appendChild(toggleBtn);
+    accord.appendChild(accordText);
+    accord.appendChild(panel);
+
+    mainDiv.appendChild(accord);
+}
+
+function addAccordClickEvents(){
+    let accords = document.getElementsByClassName("accordText");
+    let i = 0;
+    for(i; i < accords.length; i++){
+        let accord = accords[i];
+        accord.addEventListener("click", function(){
+            accord.classList.toggle("active");
+            let panel = accord.nextSibling;
+            if(panel.style.display == "block"){
+                panel.style.display = "none";
+            }else{
+                panel.style.display = "block";
+            }
+        });
+    }
+}
+
+function addAccordStyling(){
+    let accords = document.getElementsByClassName("accordion");
+    let i = 0;
+    for(i; i < accords.length; i++){
+        accords[i].style.cursor = "pointer";
+        accords[i].style.backgroundColor = "#fff";
+        accords[i].style.width = "100%";
+        accords[i].style.transition = "0.4s";
+    }
+    
+    let panels = document.getElementsByClassName("panel");
+    for(i = 0; i < panels.length; i++){
+        panels[i].style.display = "none";
+        panels[i].style.overflow = "hidden";
     }
 }
 
@@ -188,8 +294,6 @@ function askForPin(bubbleClone) {
 function validatePin() {
     let pin = document.getElementById("inputBox").value;
     console.log("Pin entered: ", pin);
-    addGoToRawButton();
-    viewAllQnA();
 
     checkInput(pin).then((a) => {
         isPublic = true;
@@ -318,7 +422,7 @@ function addGoToRawButton() {
     );
 
     goToRawBtn.addEventListener("mouseover", (e) => { goToRawBtn.style.cursor = "pointer"; });
-    //goToRawBtn.addEventListener("click", openModesPage);
+    goToRawBtn.addEventListener("click", viewAllQnA);
 
     bubbleClone.append(goToRawBtn);
         
@@ -332,6 +436,8 @@ function viewAllQnA(json) {
     let goBackToModesBtn = document.createElement("div");
     goBackToModesBtn.id = "goBackToModesBtn";
     goBackToModesBtn.id = innerHTML = "👈";
+    let bubbleClone = document.getElementById("bubbleClone");
+    bubbleClone.appendChild(goBackToModesBtn);
 
     goBackToModesBtn.setAttribute(`style`,
         `
