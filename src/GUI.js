@@ -1,4 +1,4 @@
-let isPublic = true;
+let isPublic = false;
 
 // Creating the tool bubble
 function createBubble() {
@@ -52,8 +52,10 @@ function createBubble() {
 function expandBubble() {
     console.log(`Bubble was clicked`);
 
-    const mainDiv = document.createElement("div");
+    let mainDiv = document.createElement("div");
     mainDiv.id = "mainDiv";
+
+
     // Styling main div
     mainDiv.setAttribute(`style`,
         `
@@ -63,7 +65,6 @@ function expandBubble() {
         height:280px;
         width:100%;
         border-radius: 0px 0px 22px 22px;
-    
         `
     );
 
@@ -109,13 +110,14 @@ function expandBubble() {
 
     bubbleClone.innerHTML = ''; // Removing all child elements form clone bubble;
     bubbleClone.append(mainDiv); // Adding main div to the page after the bubble is expanded
+    
 
 
     //// Adding children
     addMinimizeButton(bubbleClone);
     addInfoBox(bubbleClone);
     if (isPublic) {
-        addGoToRawButton();
+        addSecondaryButton("📑", viewAllQnA);
         addSwitch(mainDiv, "Incognito");
         addSwitch(mainDiv, "Shuffle");
         addSwitchStyling();
@@ -124,6 +126,7 @@ function expandBubble() {
         //addAccordStyling();
     } else {
         askForPin(bubbleClone);
+        addSecondaryButton("❔", viewInfo);
     }
 }
 
@@ -397,63 +400,60 @@ function closeBubble() {
     bubble.style.opacity = `1`;
 }
 
-function addGoToRawButton() {
-    console.log("Adding QnA button");
+function addSecondaryButton(icon, onClickFunc) {
+    console.log("Adding secondary button");
     let bubbleClone = document.getElementById("bubbleClone");
+    let secondaryButton = document.getElementById("secondaryButton");
     //inside of create list box
-    let goToRawBtn = document.createElement("div");
-    goToRawBtn.id = "goToRawBtn";
-    goToRawBtn.innerHTML = "📑";
-
-    goToRawBtn.setAttribute(`style`,
+    if (secondaryButton) {
+        secondaryButton.remove();
+    }
+        
+    secondaryButton = document.createElement("div");
+    secondaryButton.id = "secondaryButton";
+    secondaryButton.innerHTML = `${icon}`;
+    secondaryButton.setAttribute(`style`,
         `
-        top: 30;
-        left:210px;
-        position: relative;
-        width:40px;
-        height: 30px;
-        z-index:1003;
-        border-radius: 5px 22px 5px 0px;
-        text-align: center;
-        font-size: 20px;
-        padding-top: 0px;
-        user-select:none;
-        `
+    top: 30;
+    left:210px;
+    position: relative;
+    width:40px;
+    height: 30px;
+    z-index:1003;
+    border-radius: 5px 22px 5px 0px;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 0px;
+    user-select:none;
+    `
     );
+    secondaryButton.addEventListener("mouseover", (e) => { secondaryButton.style.cursor = "pointer"; });
+    secondaryButton.addEventListener("click", onClickFunc);
+    
 
-    goToRawBtn.addEventListener("mouseover", (e) => { goToRawBtn.style.cursor = "pointer"; });
-    goToRawBtn.addEventListener("click", viewAllQnA);
-
-    bubbleClone.append(goToRawBtn);
+    bubbleClone.append(secondaryButton);
         
 }
 
+function viewModes() {
+    clearMainDiv();
+    addSwitch(mainDiv, "Incognito");
+    addSwitch(mainDiv, "Shuffle");
+    addSwitchStyling();
+    addSecondaryButton("📑", viewAllQnA)
+}
+
+function viewInfo() {
+    console.log("TODO: viewInfo");
+}
+
 function viewAllQnA(json) {
+    console.log("IN: viewAllQnA");
     clearMainDiv();
     let mainDiv = document.createElement("mainDiv");
 
-    // Takes you back to the select modes page where all of the lists are.
-    let goBackToModesBtn = document.createElement("div");
-    goBackToModesBtn.id = "goBackToModesBtn";
-    goBackToModesBtn.id = innerHTML = "👈";
-    let bubbleClone = document.getElementById("bubbleClone");
-    bubbleClone.appendChild(goBackToModesBtn);
+    addSecondaryButton("👈", viewModes);
 
-    goBackToModesBtn.setAttribute(`style`,
-        `
-        top: 30;
-        left:210px;
-        position: relative;
-        width:40px;
-        height: 30px;
-        z-index:1003;
-        border-radius: 5px 22px 5px 0px;
-        text-align: center;
-        font-size: 20px;
-        padding-top: 10px;
-        user-select:none;
-        `
-    );
 
 
 
