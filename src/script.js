@@ -1,4 +1,8 @@
 let quizType;
+//Modes
+let Incognito = true;
+let Shuffle = false;
+let Theme = false;
 
 // -------------------------- notify -------------------------- //
 // Show welcome notification
@@ -152,83 +156,88 @@ function highlight(data) {
     if (typeof data === 'boolean') return;
 
     setInterval(() => {
-        let index;
-        try {
-            index = JSON.parse(
-                localStorage.getItem("kahoot-game_session")
-            ).questionNumber;
-        } catch (e) {}
+            let index;
+            try {
+                index = JSON.parse(
+                    localStorage.getItem("kahoot-game_session")
+                ).questionNumber;
+            } catch (e) { }
 
-        if (index) {
-            let {
-                type,
-                check,
-                correct,
-                answers
-            } = data[index];
-
-            if (
-                type !== "content" &&
-                type !== "multiple_select_poll"
-            ) {
-                let box = document.querySelector(
-                    "#root > div.controller__AppWrapper-sc-1m4rw0k-0.hHwuuw > main > div.status-bar__ContentBar-ivth8h-0.status-bar__TopBar-ivth8h-1.gCnEqt.GFKFx.top-bar__TopBar-sc-186o9v8-0.bIPhxy.question__TopBar-sc-12j7dwx-0.buBRpJ > div"
-                );
-
-                if (box) {
-                    let text = answers.join("</p><p>");
-                    if (box.style.display !== 'grid') {
-                        box.style.display = 'grid';
-                        box.style.fontSize = "25px";
-                        box.style.textAlign = 'left';
-                        box.style.lineHeight = '1.3';
-                        box.innerHTML = `<p><p style="font-size: xxx-large;color: #00fff8;">Correct ${correct.length}/${correct.length + check.length} answers:</p><p>${text}</p><p style="color: lime;">Question type: ${type}`;
-                    }
-                }
+            if (index) {
+                let {
+                    type,
+                    check,
+                    correct,
+                    answers
+                } = data[index];
 
                 if (
-                    type === "quiz" ||
-                    type === "multiple_select_quiz"
-                ) {
+                    type !== "content" && type !== "multiple_select_poll") {
+                    
+                    let box = document.querySelector(
+                        "#root > div.controller__AppWrapper-sc-1m4rw0k-0.hHwuuw > main > div.status-bar__ContentBar-ivth8h-0.status-bar__TopBar-ivth8h-1.gCnEqt.GFKFx.top-bar__TopBar-sc-186o9v8-0.bIPhxy.question__TopBar-sc-12j7dwx-0.buBRpJ > div"
+                    );
 
-                    if (document.querySelector(
-                            `[data-functional-selector="answer-1"]`
-                    ) !== null) {
-                        // For each invalid answer, turning it black
-                        check.forEach(i => {
-                            let element = document.querySelector(
-                                `[data-functional-selector="answer-${i}"]`
-                            );
-                            if (element.style.transition !== '0.5s') {
-                                element.style.transition = '0.5s';
-                                element.style.opacity = 0.2;
-                                element.style.filter = "blur(3px) grayscale(1)";
-                            }
-                        });
-
-                        // For each correct answer, turning it lime green
-                        correct.forEach(i => {
-                            let element = document.querySelector(
-                                `[data-functional-selector="answer-${i}"]`);
-                            if (element.style.transition !== '0.5s') {
-                                element.style.transition = '0.5s';
-                                element.style.filter = 'contrast(2)';
-                                element.style.border = 'lime solid 3px';
-                                element.style.borderRadius = '5px';
-                            }
-                        });
+                    if (box) {
+                        let text = answers.join("</p><p>");
+                        if (box.style.display !== 'grid') {
+                            box.style.display = 'grid';
+                            box.style.fontSize = "25px";
+                            box.style.textAlign = 'left';
+                            box.style.lineHeight = '1.3';
+                            box.innerHTML = `<p><p style="font-size: xxx-large;color: #00fff8;">Correct ${correct.length}/${correct.length + check.length} answers:</p><p>${text}</p><p style="color: lime;">Question type: ${type}`;
+                        }
                     }
-                }
 
+                    if( type === "quiz" || type === "multiple_select_quiz") {
+
+                        if (document.querySelector(
+                            `[data-functional-selector="answer-1"]`
+                        ) !== null) {
+                            // For each invalid answer, turning it black
+                            
+                            check.forEach(i => {
+                                let element = document.querySelector(
+                                    `[data-functional-selector="answer-${i}"]`
+                                );
+                                if (element.style.transition !== '0.5s') {
+                                    element.style.transition = '0.5s';
+                                    element.style.opacity = 0.2;
+                                    element.style.filter = "blur(3px) grayscale(1)";
+                                }
+                            });
+
+                            // For each correct answer, turning it lime green
+                            if (!Incognito) {
+                                correct.forEach(i => {
+                                    let element = document.querySelector(
+                                        `[data-functional-selector="answer-${i}"]`);
+                                    if (element.style.transition !== '0.5s') {
+                                        element.style.transition = '0.5s';
+                                        element.style.filter = 'contrast(2)';
+                                        if (!Incognito) {
+                                            element.style.border = 'lime solid 3px';
+                                            element.style.borderRadius = '5px';
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                }
+                if (type === "open_ended") {
+                    let element = document.querySelector(
+                        `[data-functional-selector="text-answer-input"]`
+                    );
+                    if (element)
+                        element.placeholder = answers[0];
+                }
             }
-            if (type === "open_ended") {
-                let element = document.querySelector(
-                    `[data-functional-selector="text-answer-input"]`
-                );
-                if (element)
-                    element.placeholder = answers[0];
-            }
-        }
+            console.log("CHECKING");
+        
+
+        
     }, 50);
 }
 
@@ -285,10 +294,22 @@ To resume, click 'OK' below`)
  */
 function doFunc(selector, functions) {
     // You can modify this values
-    let main = "black";
-    let text = "white";
-    let background = "url('https://gifimage.net/wp-content/uploads/2017/09/black-and-white-gif-background-tumblr-7.gif')";
-    let border = "lime dashed 3px";
+    let main;
+    let text;
+    let background;
+    let border;
+
+    if (Theme) {
+        main = "black";
+        text = "white";
+        background = "url('https://gifimage.net/wp-content/uploads/2017/09/black-and-white-gif-background-tumblr-7.gif')";
+        border = "lime dashed 3px";
+    } else {
+        main = "white";
+        text = "black";
+        background = "";
+        border = "pink dashed 10px";
+    }
     //
     let element = document.querySelector(selector);
     if (element) {
@@ -390,16 +411,6 @@ function theme() {
  */
 (async() => {
     theme();
-    notify();
-
-    const input = await getInput();
-    const json = await checkInput(input);
-    const parsed = await parse(json);
-    
-    highlight(parsed);
-    
-    console.log(`If you want to have time to search current question,
-    you can pause quiz timers by typing 'pause()' in console!`)
 })();
 
 

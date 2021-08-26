@@ -1,4 +1,6 @@
 let isPublic = false;
+let json;
+
 
 // Creating the tool bubble
 function createBubble() {
@@ -130,6 +132,25 @@ function expandBubble() {
     }
 }
 
+function checkToggles(e) {
+    console.log(e);
+    console.log("ID: ", e.target.id);
+    let id = e.target.id;
+    switch (id) {
+        case "IncognitoToggle":
+            console.log("Toggled Incognito");
+            Incognito = !Incognito;
+            Theme = !Incognito;
+            break;
+        case "ShuffleToggle":
+            Shuffle = !Shuffle;
+            break;
+        default:
+            Console.error("Default")
+            
+    }
+}
+
 function addSwitch(mainDiv, name){
     let switchDiv = document.createElement('div');
     switchDiv.className = "switch";
@@ -140,9 +161,12 @@ function addSwitch(mainDiv, name){
 
     //ToggleBtns are just name + Toggle
     let toggleBtn = document.createElement('input');
-    toggleBtn.id = `${name}Toggle}`;
+    toggleBtn.id = `${name}Toggle`;
     toggleBtn.className = "toggleBtn";
     toggleBtn.type = "checkbox";
+    if(Incognito && name === "Incognito" ){toggleBtn.checked = true;}
+    toggleBtn.addEventListener('change', checkToggles);
+    
 
     switchDiv.appendChild(switchText);
     switchDiv.appendChild(toggleBtn);
@@ -299,10 +323,16 @@ function validatePin() {
     console.log("Pin entered: ", pin);
 
     checkInput(pin).then((a) => {
-        isPublic = true;
+        console.log("IN HERE");
+        parse(a).then((b) => {
+            isPublic = true;
+            json = b;
+            highlight(json);
+            viewModes();
+        }).catch((e) => { displayMessage(e) });
         // Pin is valid
     })
-        .catch((e) => { displayMessage(e) });
+    .catch((e) => { displayMessage(e) });
 }
 
 
@@ -447,20 +477,20 @@ function viewInfo() {
     console.log("TODO: viewInfo");
 }
 
-function viewAllQnA(json) {
+function viewAllQnA() {
     console.log("IN: viewAllQnA");
     clearMainDiv();
-    let mainDiv = document.createElement("mainDiv");
+    let mainDiv = document.getElementById("mainDiv");
 
     addSecondaryButton("👈", viewModes);
 
 
 
-
+    console.log(json);
     // parse json DATA
     for (let i = 0; i < json.length; i++) {
-        let Q = json[i][0];
-        let A = json[i][1];
+        let Q = json[i]["question"];
+        let A = json[i]["answers"];
         let qnaText = document.createElement("p");
         qnaText.className = "qnaText";
         qnaText.innerHTML = `${i+1}) ${Q} | ${A}`;
@@ -490,6 +520,9 @@ window.addEventListener('keydown', (event) => {
         expandBubble();
         expand = true;
         console.log(bubble.id);
+    } else {
+        expand = false;
+        closeBubble();
     }
 });
 
