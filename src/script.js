@@ -155,6 +155,8 @@ function checkInput(input) {
  * 
  * @param {*} data 
  */
+ let selectedAll1 = false;
+ let selectedAll2 = false;
 function highlight(data) {
     console.log("IN HIGHLIGHT");
     if (typeof data === 'boolean') return;
@@ -166,13 +168,6 @@ function highlight(data) {
                 index = JSON.parse(
                     localStorage.getItem("kahoot-game_session")
                 ).questionNumber;
-                
-                    console.log("INDEX");
-                    console.log(JSON.parse(
-                        localStorage.getItem("kahoot-game_session")
-                    ));
-                    console.log("END INDEX")
-                    
                     
             } catch (e) { }
 
@@ -210,17 +205,31 @@ function highlight(data) {
                             // For each invalid answer, turning it black
                             
                             let isCorrect = false;
+                            let choiceCount = 0;
+                            let correctCount = 0;
                             
                             if(Math.random() * 100 <= accuracyValue){
                                 isCorrect = true;
                             }
-
                             check.forEach(i => {
                                 let element = document.querySelector(
                                     `[data-functional-selector="answer-${i}"]`
                                     );
-                                    if(!isCorrect){
-                                        element.click();
+                                    if(Autopilot && !isCorrect){
+                                            if(type === "quiz"){
+                                                setTimeout((e) => {element.click();}, (speedValue * 1000));
+                                            }else{
+                                                if(!selectedAll1){
+                                                    element.click();
+                                                    choiceCount++;
+                                                    if(choiceCount == check.length){
+                                                        selectedAll1 = true;
+                                                    }
+                                                }else{
+                                                    let submit = document.querySelector('[data-functional-selector="multi-select-submit-button"]');
+                                                    setTimeout((e) => {submit.click(); selectedAll1 = false;}, (speedValue * 1000));
+                                                }
+                                            }
                                     }
 
                                     if (!Incognito) {
@@ -240,8 +249,21 @@ function highlight(data) {
                             correct.forEach(i => {
                                 let element = document.querySelector(
                                     `[data-functional-selector="answer-${i}"]`);
-                                    if(isCorrect){
-                                        element.click();
+                                    if(Autopilot && isCorrect){
+                                            if(type === "quiz"){
+                                                setTimeout((e) => {element.click();}, (speedValue * 1000));
+                                            }else{
+                                                if(!selectedAll2){
+                                                    element.click();
+                                                    correctCount++;
+                                                    if(correctCount == correct.length){
+                                                        selectedAll2 = true;
+                                                    }
+                                                }else{
+                                                    let submit = document.querySelector('[data-functional-selector="multi-select-submit-button"]');
+                                                    setTimeout((e) => {submit.click(); selectedAll2 = false;}, (speedValue * 1000));
+                                                }
+                                        }
                                     }
                                     if (!Incognito) {
                                         if (element.style.transition !== '0.5s') {
