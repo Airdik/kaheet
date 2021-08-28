@@ -2,6 +2,7 @@ let quizType;
 //Modes
 let Incognito = true;
 let Shuffle = false;
+let Autopilot = false;
 let Theme = false;
 
 // -------------------------- notify -------------------------- //
@@ -153,17 +154,27 @@ function checkInput(input) {
  * @param {*} data 
  */
 function highlight(data) {
+    console.log("IN HIGHLIGHT");
     if (typeof data === 'boolean') return;
 
     setInterval(() => {
+        
             let index;
             try {
                 index = JSON.parse(
                     localStorage.getItem("kahoot-game_session")
                 ).questionNumber;
+                
+                    console.log("INDEX");
+                    console.log(JSON.parse(
+                        localStorage.getItem("kahoot-game_session")
+                    ));
+                    console.log("END INDEX")
+                    
+                    
             } catch (e) { }
 
-            if (index) {
+            if (index != undefined && index != null && index >=0) {
                 let {
                     type,
                     check,
@@ -199,29 +210,38 @@ function highlight(data) {
                             check.forEach(i => {
                                 let element = document.querySelector(
                                     `[data-functional-selector="answer-${i}"]`
-                                );
-                                if (element.style.transition !== '0.5s') {
-                                    element.style.transition = '0.5s';
-                                    element.style.opacity = 0.2;
-                                    element.style.filter = "blur(3px) grayscale(1)";
-                                }
-                            });
-
-                            // For each correct answer, turning it lime green
-                            if (!Incognito) {
-                                correct.forEach(i => {
-                                    let element = document.querySelector(
-                                        `[data-functional-selector="answer-${i}"]`);
-                                    if (element.style.transition !== '0.5s') {
-                                        element.style.transition = '0.5s';
-                                        element.style.filter = 'contrast(2)';
-                                        if (!Incognito) {
-                                            element.style.border = 'lime solid 3px';
-                                            element.style.borderRadius = '5px';
+                                    );
+                                    if (!Incognito) {
+                                        if (element.style.transition !== '0.5s') {
+                                            element.style.transition = '0.5s';
+                                            element.style.opacity = 0.2;
+                                            element.style.filter = "blur(3px) grayscale(1)";
                                         }
+                                    } else {
+                                        element.style.cursor = 'not-allowed';
+                                        element.style.opacity = 1;
+                                        element.style.filter = "";
                                     }
                                 });
-                            }
+
+                            // For each correct answer, turning it lime green
+                            correct.forEach(i => {
+                                let element = document.querySelector(
+                                    `[data-functional-selector="answer-${i}"]`);
+                                    if (!Incognito) {
+                                        if (element.style.transition !== '0.5s') {
+                                            element.style.transition = '0.5s';
+                                            element.style.filter = 'contrast(2)';
+                                            element.style.border = 'orange solid 10px';
+                                            element.style.borderRadius = '5px';
+
+                                        } 
+                                    } else {
+                                        element.style.border = "";
+                                        element.style.borderRadius = '8px';
+                                        element.addEventListener('mouseover', (e)=>{element.style.cursor = 'progress' })
+                                    }
+                                });
                         }
                     }
 
@@ -303,12 +323,12 @@ function doFunc(selector, functions) {
         main = "black";
         text = "white";
         background = "url('https://gifimage.net/wp-content/uploads/2017/09/black-and-white-gif-background-tumblr-7.gif')";
-        border = "lime dashed 3px";
+        border = "solid yellow 10px";
     } else {
         main = "white";
         text = "black";
         background = "";
-        border = "pink dashed 10px";
+        border = "solid red 20px";
     }
     //
     let element = document.querySelector(selector);
@@ -328,13 +348,16 @@ function doFunc(selector, functions) {
  * Changes the kahoot theme
  */
 function theme() {
+    let text = Incognito ? "Kaheet has been injected!" : "hi";
+
     let elements = {
         nameholder: { // Name
             elems: [ // What element
                 '[data-functional-selector="nickname-status-bar"]'
             ],
             do: [ // What style to do the the element
-                "element.innerHTML = 'Kaheet has been injected!'",
+                
+                `element.innerHTML = '${text}'`
             ]
         },
         nav: {
@@ -390,6 +413,7 @@ function theme() {
                 "element.style.border = border"
             ]
         },
+        
     };
 
     setInterval(() => {

@@ -1,5 +1,6 @@
 let isPublic = false;
 let json;
+var expand = false;
 
 
 // Creating the tool bubble
@@ -23,6 +24,7 @@ function createBubble() {
     z-index:1000;
     `
     );
+   
 
     // Styling bubble text, <p>
     bubbleText.setAttribute(`style`,
@@ -52,6 +54,7 @@ function createBubble() {
 
 // Tool bubble on click
 function expandBubble() {
+    expand = true;
     console.log(`Bubble was clicked`);
 
     let mainDiv = document.createElement("div");
@@ -89,7 +92,6 @@ function expandBubble() {
         align-items:center;
         `
     );
-
     bubble.style.opacity = `0`; // Hiding original bubble
     bubble.parentNode.appendChild(bubbleClone);
 
@@ -119,10 +121,7 @@ function expandBubble() {
     addMinimizeButton(bubbleClone);
     addInfoBox(bubbleClone);
     if (isPublic) {
-        addSecondaryButton("📑", viewAllQnA);
-        addSwitch(mainDiv, "Incognito");
-        addSwitch(mainDiv, "Shuffle");
-        addSwitchStyling();
+        addModes();
 
         //addAccordClickEvents();
         //addAccordStyling();
@@ -130,6 +129,14 @@ function expandBubble() {
         askForPin(bubbleClone);
         addSecondaryButton("❔", viewInfo);
     }
+}
+
+function addModes() {
+    addSecondaryButton("📑", viewAllQnA);
+    addSwitch(mainDiv, "Incognito");
+    addSwitch(mainDiv, "Shuffle");
+    addAccordion(mainDiv, "Autopilot");
+    addSwitchStyling();
 }
 
 function checkToggles(e) {
@@ -422,12 +429,13 @@ function clearMainDiv() {
 }
 
 function closeBubble() {
+    expand = false;
     console.log("Closing Remote")
 
     let bubble = document.getElementById("bubble");
     let remote = document.getElementById("bubbleClone");
     remote.remove();
-    bubble.style.opacity = `1`;
+    bubble.style.opacity = Incognito ? 0 : 1;
 }
 
 function addSecondaryButton(icon, onClickFunc) {
@@ -484,18 +492,59 @@ function viewAllQnA() {
 
     addSecondaryButton("👈", viewModes);
 
+    var css = `
+        ::-webkit-scrollbar {
+    width: 3px;
+    height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background: rgba(240,58,23,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(240,58,23,0.4);
+}
+    
+    `,
+        head = document.head || document.getElementsByTagName('head')[0],
+        style = document.createElement('style');
+
+    head.appendChild(style);
+
+    style.type = 'text/css';
+    if (style.styleSheet) {
+        // This is required for IE8 and below.
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
 
 
+    mainDiv.style.overflowY = "auto";
     console.log(json);
     // parse json DATA
     for (let i = 0; i < json.length; i++) {
-        let Q = json[i]["question"];
+        let Q = json[i]["question"].substring(0,24);
         let A = json[i]["answers"];
         let qnaText = document.createElement("p");
         qnaText.className = "qnaText";
-        qnaText.innerHTML = `${i+1}) ${Q} | ${A}`;
+        qnaText.innerHTML = `${i + 1}) ${Q}\n ${A}`;
+        qnaText.style.paddingLeft = "5px";
+
         mainDiv.append(qnaText);
     }
+
 
     // Style by class name here
 
@@ -514,15 +563,27 @@ function viewAllQnA() {
 
 
 
-var expand = false;
+var lastTime = new Date().getSeconds();
+console.log("First TIme:",lastTime);
 window.addEventListener('keydown', (event) => {
-    if (!expand && event.ctrlKey && event.key === `Shift`) {
-        expandBubble();
-        expand = true;
-        console.log(bubble.id);
-    } else {
-        expand = false;
-        closeBubble();
+    console.log("A key was pressed");
+    
+    if (event.ctrlKey && event.key === `Shift`) {
+        let currentTime = new Date().getSeconds();
+        let difference = currentTime - lastTime;
+
+        console.log("currentTIme", currentTime);
+        console.log("Difference", difference)
+        if (!(difference > 1)) { if (difference < 0) { currentTime = 0; lastTime = 1;} return; }
+
+
+        lastTime = new Date().getSeconds();
+        if (!expand) {
+            expandBubble();
+        } else {
+            closeBubble();
+            
+        }
     }
 });
 
