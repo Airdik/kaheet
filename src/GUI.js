@@ -136,11 +136,12 @@ function addModes() {
     addSwitch(mainDiv, "Incognito");
     addSwitch(mainDiv, "Shuffle");
     addAccordion(mainDiv, "Autopilot");
+    addAccordClickEvents();
+    addAccordStyling();
     addSwitchStyling();
 }
 
 function checkToggles(e) {
-    console.log(e);
     console.log("ID: ", e.target.id);
     let id = e.target.id;
     switch (id) {
@@ -151,6 +152,10 @@ function checkToggles(e) {
             break;
         case "ShuffleToggle":
             Shuffle = !Shuffle;
+            break;
+        case "AutopilotToggle":
+            Autopilot = !Autopilot;
+            console.log("IN AUTOPILOT");
             break;
         default:
             Console.error("Default")
@@ -195,6 +200,8 @@ function addSwitchStyling(){
     let switchTexts = document.getElementsByClassName("switchText");
     for(i = 0; i < switchTexts.length; i++){
         switchTexts[i].style.display = "inline";
+        switchTexts[i].style.marginLeft = "1em";
+
     }
 
     let toggleBtns = document.getElementsByClassName("toggleBtn");
@@ -205,7 +212,6 @@ function addSwitchStyling(){
 }
 
 function addAccordion(mainDiv, name){
-
     let accord = document.createElement('div');
     accord.className = "accordion";
 
@@ -215,17 +221,85 @@ function addAccordion(mainDiv, name){
 
     let panel = document.createElement('div');
     panel.className = "panel";
+    addPanelContent(panel);
 
     //ToggleBtns are just name + Toggle
     let toggleBtn = document.createElement('input');
-    toggleBtn.id = `${name}Toggle}`;
+    toggleBtn.id = `${name}Toggle`;
+    toggleBtn.className = "toggleBtn";
     toggleBtn.type = "checkbox";
+    toggleBtn.addEventListener('change', checkToggles);
 
-    panel.appendChild(toggleBtn);
     accord.appendChild(accordText);
+    accord.appendChild(toggleBtn);
     accord.appendChild(panel);
 
     mainDiv.appendChild(accord);
+}
+
+function addPanelContent(panel){
+    let speed = document.createElement("div");
+    speed.id = "speedPanelContent";
+
+    let speedText = document.createElement("p");
+    speedText.innerText = "Wait Time (seconds):";
+    speed.appendChild(speedText);
+
+    let speedSlider = document.createElement("input");
+    speedSlider.id = "speedSlider";
+    speedSlider.type = "range";
+    speedSlider.min = "0";
+    speedSlider.max = "240";
+    speedSlider.value = "0";
+    speed.appendChild(speedSlider);
+
+    let speedValue = document.createElement("p");
+    speedValue.id = "speedValue";
+    speedValue.innerText = "0";
+    speed.appendChild(speedValue);
+
+    speedSlider.addEventListener("input", checkSlider);
+
+
+    let accuracy = document.createElement("div");
+    accuracy.id = "accuracyPanelContent";
+
+    let accuracyText = document.createElement("p");
+    accuracyText.innerText = "Accuracy:";
+    accuracy.appendChild(accuracyText);
+
+    let accuracySlider = document.createElement("input");
+    accuracySlider.id = "accuracySlider";
+    accuracySlider.type = "range";
+    accuracySlider.min = "0";
+    accuracySlider.max = "100";
+    accuracySlider.value = "100";
+    accuracy.appendChild(accuracySlider);
+
+    let accuracyValue = document.createElement("p");
+    accuracyValue.id = "accuracyValue";
+    accuracyValue.innerText = "100";
+    accuracy.appendChild(accuracyValue);
+
+    accuracySlider.addEventListener("input", checkSlider);
+
+    panel.appendChild(speed);
+    panel.appendChild(accuracy);
+}
+
+function checkSlider(e){
+    let target = e.target;
+    target.nextSibling.innerText = target.value;
+    let id = target.id;
+
+    switch(id){
+        case "speedSlider":
+            speedValue = target.value;
+            break;
+            case "accuracySlider":
+            accuracyValue = target.value;
+            break;
+    }
 }
 
 function addAccordClickEvents(){
@@ -235,7 +309,7 @@ function addAccordClickEvents(){
         let accord = accords[i];
         accord.addEventListener("click", function(){
             accord.classList.toggle("active");
-            let panel = accord.nextSibling;
+            let panel = accord.nextSibling.nextSibling;
             if(panel.style.display == "block"){
                 panel.style.display = "none";
             }else{
@@ -247,19 +321,38 @@ function addAccordClickEvents(){
 
 function addAccordStyling(){
     let accords = document.getElementsByClassName("accordion");
+    let accordTexts = document.getElementsByClassName("accordText");
+    let panels = document.getElementsByClassName("panel");
+
     let i = 0;
     for(i; i < accords.length; i++){
-        accords[i].style.cursor = "pointer";
         accords[i].style.backgroundColor = "#fff";
         accords[i].style.width = "100%";
+        accords[i].style.paddingTop = "0.5em";
+        accords[i].style.paddingBottom = "0.5em";
+        accords[i].style.borderBottom = "solid gray 1px";
         accords[i].style.transition = "0.4s";
     }
+
+    for(i = 0; i < accordTexts.length; i++){
+        accordTexts[i].style.cursor = "pointer";
+        accordTexts[i].style.display = "inline";
+        accordTexts[i].style.marginLeft = "1em";
+    }
     
-    let panels = document.getElementsByClassName("panel");
     for(i = 0; i < panels.length; i++){
         panels[i].style.display = "none";
         panels[i].style.overflow = "hidden";
+        panels[i].style.paddingLeft = "2em";
+        panels[i].style.paddingRight = "1em";
+
     }
+
+    document.getElementById("speedValue").style.float = "right";
+    //document.getElementById("speedValue").style.marginRight = "1em";
+    document.getElementById("accuracyValue").style.float = "right";
+    //document.getElementById("accuracyValue").style.marginRight = "1em";
+
 }
 
 function askForPin(bubbleClone) {
@@ -475,10 +568,7 @@ function addSecondaryButton(icon, onClickFunc) {
 
 function viewModes() {
     clearMainDiv();
-    addSwitch(mainDiv, "Incognito");
-    addSwitch(mainDiv, "Shuffle");
-    addSwitchStyling();
-    addSecondaryButton("📑", viewAllQnA)
+    addModes();
 }
 
 function viewInfo() {

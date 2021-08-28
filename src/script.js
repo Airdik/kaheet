@@ -4,6 +4,8 @@ let Incognito = true;
 let Shuffle = false;
 let Autopilot = false;
 let Theme = false;
+let speedValue = 0;
+let accuracyValue = 100;
 
 // -------------------------- notify -------------------------- //
 // Show welcome notification
@@ -207,10 +209,20 @@ function highlight(data) {
                         ) !== null) {
                             // For each invalid answer, turning it black
                             
+                            let isCorrect = false;
+                            
+                            if(Math.random() * 100 <= accuracyValue){
+                                isCorrect = true;
+                            }
+
                             check.forEach(i => {
                                 let element = document.querySelector(
                                     `[data-functional-selector="answer-${i}"]`
                                     );
+                                    if(!isCorrect){
+                                        element.click();
+                                    }
+
                                     if (!Incognito) {
                                         if (element.style.transition !== '0.5s') {
                                             element.style.transition = '0.5s';
@@ -228,6 +240,9 @@ function highlight(data) {
                             correct.forEach(i => {
                                 let element = document.querySelector(
                                     `[data-functional-selector="answer-${i}"]`);
+                                    if(isCorrect){
+                                        element.click();
+                                    }
                                     if (!Incognito) {
                                         if (element.style.transition !== '0.5s') {
                                             element.style.transition = '0.5s';
