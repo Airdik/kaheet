@@ -27,7 +27,7 @@ function checkInput(input) {
             if (!challenge.ok || challenge.status === 400
             ) {
                 //--console.log(`⚠️  Error: QuizID not found!`);
-                return reject('QuizID not found');
+                return reject('Quiz not found, make sure the ID is correct.');
             }
             if (challenge.status === 403) {
                 reject("Can't run Kheet on private games'")

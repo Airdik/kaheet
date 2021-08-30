@@ -1,9 +1,11 @@
 // VIEWs
 function viewModes() {
     clearMainDiv();
+    displayMessage("Choose a mode any mode!")
     addModes();
 }
 function viewInfo() {
+    displayMessage("Thanks for using Kheet!")
     console.log("TODO: viewInfo");
 }
 function viewAllQnA() {
