@@ -39,9 +39,10 @@ fetch("https://kaheet.herokuapp.com/kaheet/script/find")
 2. Open console and paste script:
 
 ```ts
-fetch("https://raw.githubusercontent.com/pxtrez/kaheet/main/src/script.min.js")
-.then((r) => r.text()
-.then((t) => eval(t)))
+fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
+.then((a) => a.text()
+.then((b) => eval(b)
+.then((c) => eval(c))))
 ```
 
 3. Then enter the quiz ID.
