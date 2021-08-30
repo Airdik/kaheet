@@ -64,7 +64,7 @@ function addAccordion(mainDiv, name) {
 
     let accordText = document.createElement('div');
     accordText.className = "accordText"
-    accordText.innerText = name;
+    accordText.innerHtml = name + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
     let panel = document.createElement('div');
     panel.className = "panel";

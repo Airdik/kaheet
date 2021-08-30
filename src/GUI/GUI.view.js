@@ -8,6 +8,7 @@ function viewInfo() {
 }
 function viewAllQnA() {
     console.log("IN: viewAllQnA");
+    displayMessage("All of the answers are below.")
     clearMainDiv();
     let mainDiv = document.getElementById("mainDiv");
 
@@ -60,7 +61,7 @@ function viewAllQnA() {
         let A = json[i]["answers"];
         let qnaText = document.createElement("p");
         qnaText.className = "qnaText";
-        qnaText.innerHTML = `<p style="font-weight:bold">${i + 1}) ${Q}...</p>&nbsp;${A}`;
+        qnaText.innerHTML = `<p style="font-weight:bold">${i + 1}) ${Q}...</p><p>${A}</p>`;
         qnaText.style.paddingLeft = "5px";
 
         mainDiv.append(qnaText);

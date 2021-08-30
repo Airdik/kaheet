@@ -19,6 +19,7 @@ function checkInput(input) {
     return new Promise(async(resolve, reject) => {
         const kahoot = await fetch(`https://kahoot.it/rest/kahoots/${input}`); // Trying to find the Kahoot game by input (Game ID)
 
+        if(kahoot.status === 403) { return reject("Can't run Kheet on private games.")}
         if (!kahoot.ok || kahoot.status === 400) { // Checking if the fetch is not ok
             const challenge = await fetch(`https://kahoot.it/rest/challenges/${input}/answers`);
             const json = await challenge.json();
@@ -27,6 +28,9 @@ function checkInput(input) {
             ) {
                 //--console.log(`⚠️  Error: QuizID not found!`);
                 return reject('QuizID not found');
+            }
+            if (challenge.status === 403) {
+                reject("Can't run Kheet on private games'")
             } else {
                 quizType = "challenge";
                 //--console.log(`✔️  QuizID found!`);

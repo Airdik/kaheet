@@ -1,42 +1,28 @@
 # Kaheet
 
-[![GitHub stars](https://img.shields.io/github/stars/pxtrez/kaheet?style=for-the-badge&logo=appveyor)](https://github.com/pxtrez/kaheet/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/EShrestha/kaheet?style=for-the-badge&logo=appveyor)](https://github.com/EShrestha/kaheet/stargazers)
 
-[![GitHub issues](https://img.shields.io/github/issues/pxtrez/kaheet?style=for-the-badge)](https://github.com/pxtrez/kaheet/issues)
+[![GitHub issues](https://img.shields.io/github/issues/EShrestha/kaheet?style=for-the-badge)](https://github.com/EShrestha/kaheet/issues)
 
-[![made with love](https://img.shields.io/badge/made%20with-%F0%9F%92%99-blue?style=for-the-badge)](https://github.com/pxtrez/kaheet)
+[![made with love](https://img.shields.io/badge/made%20with-%F0%9F%92%99-blue?style=for-the-badge)](https://github.com/EShrestha/kaheet)
 
 ## Overview
 
-Kaheet is a free kahoot cheat made by [pxtrez](https://gihub.com/pxtrez)
+Kaheet is a free kahoot cheat originally by [pxtrez](https://gihub.com/pxtrez)
+Modified by [EShrestha](https://github.com/EShrestha) and [Ratel](https://github.com/Ratel8989)
 
 - [How to use](#How-to-use?)
-    * [Get quiz by name](#Get-quiz-by-name)
     * [Cheat](#Cheat)
 - [Any bugs or problems?](#Any-bugs-or-problems?)
 
 ## How to use?
 
-To use the cheat, you need to enter the quiz ID. You can type it or search for it using [quiz name](#Get-quiz-by-name)
-
-### Get quiz by name
-
-1. Join Kahoot Game
-2. Open console and paste script:
-
-```ts
-fetch("https://kaheet.herokuapp.com/kaheet/script/find")
-.then((r) => r.text()
-.then((t) => eval(t)))
-```
-
-3. Enter your quiz name and copy the quiz ID you need
-4. Paste [this](#Cheat) script
+To use the cheat, simply copy [script](#Cheat) then paste it into the browsers console once you are in the game.
 
 ### Cheat
 
 1. Join Kahoot Game
-2. Open console and paste script:
+2. Open browser console (F12) and paste the script from below:
 
 ```ts
 fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
@@ -44,10 +30,17 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 .then((b) => eval(b)
 .then((c) => eval(c))))
 ```
+3. A GUI bubble will appear at the bottom right of your screen.
 
-3. Then enter the quiz ID.
+4. It will only be visible for the first click as Incognito mode is on by default, once closed you can open again by either clicking the invisible space at the bottom right of your screen or by pressing Ctrl + Shift, which will also close the GUI when it is open.
+
+5. Then enter the quiz ID.
 
 * Wrong answers should be darker than the correct ones.
+*  In Incognito mode the correct answers box corner will be slightly rounder then the rest and when you hover over it your cursor symbol should be loading.
+* In Incognito mode when you hover over wrong answers your cursor symbol will be a not-allowed symbol.
+
+
 
 ![image](./docs/example.png)
 

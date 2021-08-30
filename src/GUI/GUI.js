@@ -228,7 +228,6 @@ function askForPin(bubbleClone) {
 }
 function validatePin() {
     let pin = document.getElementById("inputBox").value;
-    console.log("Pin entered: ", pin);
 
     checkInput(pin).then((a) => {
         console.log("IN HERE");
@@ -237,13 +236,15 @@ function validatePin() {
             json = b;
             highlight(json);
             viewModes();
-        }).catch((e) => { displayMessage(e) });
+        }).catch((e) => { displayMessage(e, true) });
         // Pin is valid
     })
-    .catch((e) => { displayMessage(e) });
+    .catch((e) => { displayMessage(e, true) });
 }
-function displayMessage(message) {
-    document.getElementById("infoText").innerHTML = message;
+function displayMessage(message, error = false) {
+    let infoDiv = document.getElementById("infoText");
+    infoDiv.style.color = error ? "red" : "black";
+    infoDiv.innerHTML = message;
 }
 function clearMainDiv() {
     let mainDiv = document.getElementById("mainDiv");
