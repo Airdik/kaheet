@@ -1,3 +1,7 @@
+var speedSliderValue = "0";
+var accuracySliderValue = "100";
+
+
 // ADDs
 function addModes() {
     addSecondaryButton("📑", viewAllQnA);
@@ -101,7 +105,7 @@ function addPanelContent(panel) {
     speedSlider.type = "range";
     speedSlider.min = "0";
     speedSlider.max = "240";
-    speedSlider.value = "0";
+    speedSlider.value = speedSliderValue;
     speed.appendChild(speedSlider);
 
     let speedValue = document.createElement("p");
@@ -124,7 +128,7 @@ function addPanelContent(panel) {
     accuracySlider.type = "range";
     accuracySlider.min = "0";
     accuracySlider.max = "100";
-    accuracySlider.value = "100";
+    accuracySlider.value = accuracySliderValue;
     accuracy.appendChild(accuracySlider);
 
     let accuracyValue = document.createElement("p");

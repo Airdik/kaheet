@@ -193,9 +193,11 @@ function checkSlider(e){
     switch(id){
         case "speedSlider":
             speedValue = target.value;
+            speedSliderValue = `${target.value}`;
             break;
             case "accuracySlider":
             accuracyValue = target.value;
+            accuracySliderValue = `${target.value}`;
             break;
     }
 }
