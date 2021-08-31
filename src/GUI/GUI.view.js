@@ -5,8 +5,14 @@ function viewModes() {
     addModes();
 }
 function viewInfo() {
-    displayMessage("Thanks for using Kheet!")
-    console.log("TODO: viewInfo");
+    displayMessage("Thanks for using Kheet!");
+    clearMainDiv();
+    let mainDiv = document.createElement("mainDiv");
+    mainDiv.style.overflowX = "hidden";
+    mainDiv.style.overflowY = "scroll";
+    mainDiv.innerHTML =
+        'Kaheet is a free kahoot cheat originally by <a href="https://gihub.com/pxtrez">pxtrez</a> Modified by <a href="https://gihub.com/EShrestha">EShrestha</a> and <a href="https://gihub.com/Ratel8989">Ratel</a>'
+    addSecondaryButton("👈", askForPin);
 }
 function viewAllQnA() {
     displayMessage("All of the answers are below.")
