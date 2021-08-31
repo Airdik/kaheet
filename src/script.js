@@ -30,7 +30,7 @@ function checkInput(input) {
                 return reject('Quiz not found, make sure the ID is correct.');
             }
             if (challenge.status === 403) {
-                reject("Can't run Kheet on private games'")
+                reject("Can't run Kheet on private games.")
             } else {
                 quizType = "challenge";
                 //--console.log(`✔️  QuizID found!`);

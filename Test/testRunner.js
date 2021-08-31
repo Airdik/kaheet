@@ -1,16 +1,7 @@
-
-
-fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/script.js")
-    .then((r) => r.text()
-        .then((t) =>
-            fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/test.js")
-                .then((r2) => r2.text()
-                    .then((t2) => allFiles = (t + t2)))));
-
-
-
-
-fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/testRunner.js")
-    .then((r) => r.text()
-        .then((t) => eval(t)
-            .then((y) => eval(y))))
+fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
+    .then((a) => a.text()
+        .then((b) => eval(b)
+            .then((d) =>
+                fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/test.js")
+                    .then((e) => e.text()
+                        .then((f) => eval(d + f))))));
