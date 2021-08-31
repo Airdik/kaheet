@@ -7,7 +7,7 @@ function viewModes() {
 function viewInfo() {
     displayMessage("Thanks for using Kheet!");
     clearMainDiv();
-    let mainDiv = document.createElement("mainDiv");
+    let mainDiv = document.getElementById("mainDiv");
     mainDiv.style.overflowX = "hidden";
     mainDiv.style.overflowY = "scroll";
     mainDiv.innerHTML =
