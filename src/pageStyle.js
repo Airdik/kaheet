@@ -104,23 +104,23 @@ function highlight(data) {
                             }
                         });
 
-                        // For each correct answer, turning it lime green
                         correct.forEach(i => {
                             let element = document.querySelector(
-                                `[data-functional-selector="answer-${i}"]`);
-                            if (Autopilot && isCorrect) {
-                                if (type === "quiz") {
-                                    setTimeout((e) => { element.click(); }, (speedValue * 1000));
-                                } else {
-                                    if (!selectedAll2) {
-                                        element.click();
+                                `[data-functional-selector="answer-${i}"]`);//Gets the button equivalent
+                            if (Autopilot && isCorrect) { //If on autopilot mode and landed on correct(rng)
+                                if (type === "quiz") {//If normal question
+                                    setTimeout((e) => { element.click(); }, (speedValue * 1000)); //Click on button (factors in wait time)
+                                } else { //If multiselect question
+                                    if (!selectedAll2) { //Makes sure didn't loop through all answers already
+                                        element.click(); //Select answer
                                         correctCount++;
-                                        if (correctCount == correct.length) {
+                                        if (correctCount == correct.length) { //Finished looping through all correct answers
                                             selectedAll2 = true;
                                         }
                                     } else {
                                         let submit = document.querySelector('[data-functional-selector="multi-select-submit-button"]');
                                         setTimeout((e) => { submit.click(); selectedAll2 = false; }, (speedValue * 1000));
+                                        //Gets submit button and presses it after wait time
                                     }
                                 }
                             }
