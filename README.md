@@ -8,7 +8,7 @@
 
 ## Overview
 
-Kaheet is a free kahoot cheat originally by [pxtrez](https://gihub.com/pxtrez)
+Kaheet is a free kahoot cheat originally by [pxtrez](https://github.com/pxtrez)
 Modified by [EShrestha](https://github.com/EShrestha) and [Ratel](https://github.com/Ratel8989)
 
 - [How to use](#How-to-use?)
