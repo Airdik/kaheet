@@ -44,6 +44,18 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 
 ![image](./docs/example.png)
 
+
+## Unit Test
+
+```ts
+fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/testRunner.js")
+.then((a) => a.text()
+.then((b) => eval(b)
+.then((c) => eval(c))))
+```
+- Kheet should be working fine if all tests pass.
+    * Ignore the red errors chrome throws, as long as all of the tests are green you're good. 
+
 ## Bugs
 
 Known unpatched bugs.
