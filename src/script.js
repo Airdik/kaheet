@@ -26,18 +26,15 @@ function checkInput(input) {
 
             if (!challenge.ok || challenge.status === 400
             ) {
-                //--console.log(`⚠️  Error: QuizID not found!`);
                 return reject('Quiz not found, make sure the ID is correct.');
             }
             if (challenge.status === 403) {
                 reject("Can't run Kheet on private games.")
             } else {
                 quizType = "challenge";
-                //--console.log(`✔️  QuizID found!`);
                 resolve(json.challenge.kahoot);
             }
         } else {
-            //--console.log(`✔️  QuizID found!`);
             const json = await kahoot.json();
             resolve(json);
         }

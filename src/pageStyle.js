@@ -1,3 +1,9 @@
+isRandomQuestions = false;
+isRandomAnswers = false;
+
+
+
+
 // -------------------------- highlight -------------------------- //
 // Show correct answers
 /**
@@ -9,8 +15,10 @@
 let selectedAll1 = false;
 let selectedAll2 = false;
 function highlight(data) {
-    console.log("IN HIGHLIGHT");
     if (typeof data === 'boolean') return;
+
+    
+    
 
     setInterval(() => {
 
@@ -142,9 +150,6 @@ function highlight(data) {
                     element.placeholder = answers[0];
             }
         }
-        console.log("CHECKING");
-
-
 
     }, 50);
 }

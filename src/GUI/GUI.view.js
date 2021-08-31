@@ -9,7 +9,6 @@ function viewInfo() {
     console.log("TODO: viewInfo");
 }
 function viewAllQnA() {
-    console.log("IN: viewAllQnA");
     displayMessage("All of the answers are below.")
     clearMainDiv();
     let mainDiv = document.getElementById("mainDiv");
@@ -56,7 +55,6 @@ function viewAllQnA() {
 
 
     mainDiv.style.overflowY = "auto";
-    console.log(json);
     // parse json DATA
     for (let i = 0; i < json.length; i++) {
         let Q = json[i]["question"].substring(0, 28);
@@ -73,4 +71,6 @@ function viewAllQnA() {
     // Style by class name here
 
 }
+
+
 

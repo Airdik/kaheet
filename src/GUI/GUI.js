@@ -49,12 +49,10 @@ function createBubble() {
     bubble.addEventListener(`click`, expandBubble);
     bubble.addEventListener("mouseover", (e) => { bubble.style.cursor = "pointer"; });
 
-    console.log(`Bubble created`);
 }
 // Tool bubble on click
 function expandBubble() {
     expand = true;
-    console.log(`Bubble was clicked`);
 
     let mainDiv = document.createElement("div");
     mainDiv.id = "mainDiv";
@@ -130,11 +128,9 @@ function expandBubble() {
     }
 }
 function checkToggles(e) {
-    console.log("ID: ", e.target.id);
     let id = e.target.id;
     switch (id) {
         case "IncognitoToggle":
-            console.log("Toggled Incognito");
             Incognito = !Incognito;
             Theme = !Incognito;
             break;
@@ -143,7 +139,6 @@ function checkToggles(e) {
             break;
         case "AutopilotToggle":
             Autopilot = !Autopilot;
-            console.log("IN AUTOPILOT");
             break;
         default:
             Console.error("Default")
@@ -230,7 +225,6 @@ function validatePin() {
     let pin = document.getElementById("inputBox").value;
 
     checkInput(pin).then((a) => {
-        console.log("IN HERE");
         parse(a).then((b) => {
             isPublic = true;
             json = b;
@@ -252,7 +246,6 @@ function clearMainDiv() {
 }
 function closeBubble() {
     expand = false;
-    console.log("Closing Remote")
 
     let bubble = document.getElementById("bubble");
     let remote = document.getElementById("bubbleClone");
@@ -262,16 +255,12 @@ function closeBubble() {
 
 
 var lastTime = new Date().getSeconds();
-console.log("First TIme:",lastTime);
 window.addEventListener('keydown', (event) => {
-    console.log("A key was pressed");
     
     if (event.ctrlKey && event.key === `Shift`) {
         let currentTime = new Date().getSeconds();
         let difference = currentTime - lastTime;
 
-        console.log("currentTIme", currentTime);
-        console.log("Difference", difference)
         if (!(difference > 1)) { if (difference < 0) { currentTime = 0; lastTime = 1;} return; }
 
 

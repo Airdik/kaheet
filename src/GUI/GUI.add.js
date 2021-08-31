@@ -138,7 +138,6 @@ function addPanelContent(panel) {
     panel.appendChild(accuracy);
 }
 function addSecondaryButton(icon, onClickFunc) {
-    console.log("Adding secondary button");
     let bubbleClone = document.getElementById("bubbleClone");
     let secondaryButton = document.getElementById("secondaryButton");
     //inside of create list box
