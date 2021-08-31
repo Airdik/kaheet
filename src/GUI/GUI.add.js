@@ -110,7 +110,7 @@ function addPanelContent(panel) {
 
     let speedValue = document.createElement("p");
     speedValue.id = "speedValue";
-    speedValue.innerText = "0";
+    speedValue.innerText = speedSliderValue;
     speed.appendChild(speedValue);
 
     speedSlider.addEventListener("input", checkSlider);
@@ -133,7 +133,7 @@ function addPanelContent(panel) {
 
     let accuracyValue = document.createElement("p");
     accuracyValue.id = "accuracyValue";
-    accuracyValue.innerText = "100";
+    accuracyValue.innerText = accuracySliderValue;
     accuracy.appendChild(accuracyValue);
 
     accuracySlider.addEventListener("input", checkSlider);
