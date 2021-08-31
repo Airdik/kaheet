@@ -11,7 +11,7 @@ function viewInfo() {
     mainDiv.style.overflowX = "hidden";
     mainDiv.style.overflowY = "scroll";
     mainDiv.innerHTML =
-        'Kaheet is a free kahoot cheat originally by <a href="https://gihub.com/pxtrez">pxtrez</a> Modified by <a href="https://gihub.com/EShrestha">EShrestha</a> and <a href="https://gihub.com/Ratel8989">Ratel</a>'
+        'Kaheet is a free kahoot cheat originally by <a href="https://gihub.com/pxtrez" target="_blank">pxtrez</a> Modified by <a href="https://gihub.com/EShrestha" target="_blank">EShrestha</a> and <a href="https://gihub.com/Ratel8989" target="_blank">Ratel</a>'
     addSecondaryButton("👈", askForPin);
 }
 function viewAllQnA() {

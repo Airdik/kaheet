@@ -200,6 +200,7 @@ function checkSlider(e){
     }
 }
 function askForPin() {
+    clearMainDiv();
     let mainDiv = document.getElementById('mainDiv');
     let inputBox = document.createElement('input');
     let tryButton = document.createElement('button');
