@@ -123,7 +123,7 @@ function expandBubble() {
         //addAccordClickEvents();
         //addAccordStyling();
     } else {
-        askForPin(bubbleClone);
+        askForPin();
         addSecondaryButton("❔", viewInfo);
     }
 }
@@ -159,10 +159,11 @@ function checkSlider(e){
             break;
     }
 }
-function askForPin(bubbleClone) {
+function askForPin() {
     let mainDiv = document.getElementById('mainDiv');
     let inputBox = document.createElement('input');
     let tryButton = document.createElement('button');
+    let bubbleClone = document.getElementById('bubbleClone');
     inputBox.id = "inputBox";
     tryButton.id = "tryButton";
     tryButton.innerHTML = "Connect";
@@ -218,6 +219,8 @@ function askForPin(bubbleClone) {
 
     mainDiv.append(inputBox);
     mainDiv.append(tryButton)
+
+    addSecondaryButton("❔", viewInfo);
 
     bubbleClone.append(mainDiv);
 }
