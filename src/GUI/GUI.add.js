@@ -233,6 +233,9 @@ function addInfoBox(bubbleClone) {
         font-size: 18px;
         font-weight: bold;
         color:black;
+        display:flex;
+        height:100%;
+        align-items:center;
     
         `
     );

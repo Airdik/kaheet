@@ -268,6 +268,8 @@ function askForPin() {
 function validatePin() {
     let pin = document.getElementById("inputBox").value;
 
+    if (pin == undefined || pin == null) { displayMessage("Enter an ID first!", true); return;}
+
     checkInput(pin).then((a) => {
         parse(a).then((b) => {
             isPublic = true;

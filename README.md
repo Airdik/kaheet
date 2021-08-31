@@ -31,10 +31,12 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 .then((c) => eval(c))))
 ```
 3. A GUI bubble will appear at the bottom right of your screen.
+![image](./docs/bubble.png)
 
 4. It will only be visible for the first click as Incognito mode is on by default, once closed you can open again by either clicking the invisible space at the bottom right of your screen or by pressing Ctrl + Shift, which will also close the GUI when it is open.
 
 5. Then enter the quiz ID.
+
 
 * Wrong answers should be darker than the correct ones.
 *  In Incognito mode the correct answers box corner will be slightly rounder then the rest and when you hover over it your cursor symbol should be loading.
