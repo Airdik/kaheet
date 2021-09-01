@@ -172,7 +172,8 @@ function doFunc(selector, functions) {
     if (Theme) {
         main = "black";
         text = "white";
-        background = "url('https://gifimage.net/wp-content/uploads/2017/09/black-and-white-gif-background-tumblr-7.gif')";
+        //background = "url('https://gifimage.net/wp-content/uploads/2017/09/black-and-white-gif-background-tumblr-7.gif')"; // original
+        background = "url('https://camo.githubusercontent.com/59c3c4596a1ba77e45b39bfcfae9930664f85519856f941170decf684a5febcc/68747470733a2f2f692e696d6775722e636f6d2f387579304952302e676966')";
         border = "solid yellow 10px";
     } else {
         main = "white";
