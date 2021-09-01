@@ -5,6 +5,7 @@ let Shuffle = false;
 let Autopilot = false;
 
 // Global Variables
+let Theme = false;
 let speedValue = 0;
 let accuracyValue = 100;
 

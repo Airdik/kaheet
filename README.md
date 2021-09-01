@@ -11,9 +11,9 @@
 Kaheet is a free kahoot cheat originally by [pxtrez](https://github.com/pxtrez)
 Modified by [EShrestha](https://github.com/EShrestha) and [Ratel](https://github.com/Ratel8989)
 
-- [How to use](#How-to-use?)
+- [How to use](#how-to-use)
     * [Cheat](#Cheat)
-- [Any bugs or problems?](#Any-bugs-or-problems?)
+- [Any bugs or problems?](#any-bugs-or-problems)
 
 ## How to use?
 
