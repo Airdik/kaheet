@@ -35,7 +35,9 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 
 4. It will only be visible for the first click as Incognito mode is on by default, once closed you can open again by either clicking the invisible space at the bottom right of your screen or by pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd>, which will also close/open the GUI when it is opened/closed.
 
-5. Then enter the quiz ID.
+5. Then enter the quiz ID, it will be on the URL of your instructors screen.
+
+![image](./docs/quizIdUrl.png)
 
 ![image](./docs/enterQuizId.png)
 
