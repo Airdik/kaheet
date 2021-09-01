@@ -22,7 +22,7 @@ To use the cheat, simply copy [script](#Cheat) then paste it into the browsers c
 ### Cheat
 
 1. Join Kahoot Game
-2. Open browser console (F12) and paste the script from below:
+2. Open browser console <kbd>F12</kbd> and paste the script from below:
 
 ```ts
 fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
