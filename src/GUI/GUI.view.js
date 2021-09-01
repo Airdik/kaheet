@@ -1,12 +1,12 @@
 // VIEWs
 function viewModes() {
     clearMainDiv();
-    displayMessage("Choose a mode any mode!")
+    displayMessage("Choose modes below")
     addModes();
 }
 
 function viewInfo() {
-    displayMessage("Thanks for using Kheet!");
+    displayMessage("Thanks for using Kaheet!");
     clearMainDiv();
     let mainDiv = document.getElementById("mainDiv");
     mainDiv.style.overflowX = "hidden";

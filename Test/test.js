@@ -23,7 +23,7 @@ async function testCheckInputPrivate() {
             .then(function (value) { //If gets back a resolve promise (no error)
                 reject(false);
             }).catch((error) => { //If gets back a reject promise (error)
-                if (error === "Can't run Kheet on private games."){ resolve(true);}else{reject(error);}
+                if (error === "Can't run Kaheet on private games."){ resolve(true);}else{reject(error);}
             });
 
     });
