@@ -9,7 +9,7 @@
 ## Overview
 
 Kaheet is a free kahoot cheat originally by [pxtrez](https://github.com/pxtrez)
-Modified by [EShrestha](https://github.com/EShrestha) and [Ratel](https://github.com/Ratel8989)
+Implemented GUI and modes by [Airdik](https://github.com/EShrestha) and [Ratel](https://github.com/Ratel8989)
 
 - [How to use](#how-to-use)
     * [Cheat](#Cheat)
@@ -41,7 +41,7 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 
 ![image](./docs/enterQuizId.png)
 
-6. If the quiz is correct and the game is not private you will see the Modes page. Some modes have extra options, which you can access by clicking them.
+6. If the quiz ID is valid and the game is not private you will see the Modes page. Some modes have extra options, which you can access by clicking their names.
 
 ![image](./docs/chooseModes.png)
 
@@ -51,7 +51,7 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 
 
 8. Once you are playing
-    - Wrong answers should be darker than the correct ones.
+    - The correct answer(s) will be clearly highlighted. Incorrect answer(s) will be dimmed.
 
     ![image](./docs/example.png)
 
@@ -63,6 +63,9 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 
 ## Unit Test
 
+- Having problems?
+    * You can paste the script below into you browser console. NOTE: it will only work when you are on the kahoot.it site.
+
 ```ts
 fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/testRunner.js")
 .then((a) => a.text()
@@ -71,13 +74,18 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/testRunner.j
 ```
 - Kaheet should be working fine if all tests pass.
     * Ignore the red errors chrome throws, as long as all of the tests are green you're good. 
+- If a test fails
+    * Please submitted an issue at [Bugs or Problems](#any-bugs-or-problems) detailing what occurred.
 
 ## Bugs
 
-Known unpatched bugs.
+Known bugs and temporary workarounds.
 
-1. When the teacher chooses: random answers and/or random questions, the kaheet is in trouble. Highlights wrong answers and themes do not work properly. Then you should just find the correct answer by clicking 📑 in the modes page. 
+1. When the teacher chooses: random answers and/or random questions, the kaheet is in trouble. Highlights wrong answers and themes do not work properly. 
+    * Then you should just find the correct answer by clicking 📑 in the modes page.
+
 2. Cheat doesn't work for private quizzes
+    * No workaround at the moment, good luck!
 
 ## Any bugs or problems?
 
