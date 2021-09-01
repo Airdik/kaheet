@@ -7,6 +7,10 @@ var expand = false;
 // GUI
 // Creating the tool bubble
 function createBubble() {
+
+    // Close the console automatically
+    element.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'f12' }));
+
     var bubble = document.createElement(`div`); // Main bubble div
     bubble.id = "bubble"; // Giving div an id
     var bubbleText = document.createElement("p"); // p tag inside of bubble div
