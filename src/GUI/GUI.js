@@ -279,7 +279,7 @@ function validatePin() {
     let pin = document.getElementById("inputBox").value;
 
     // Checking if user actually entered something
-    if (pin == undefined || pin == null) { displayMessage("Enter an ID first!", true); return;}
+    if (pin == undefined || pin == null || pin.trim() == "") { displayMessage("Enter an ID first!", true); return;}
 
     checkInput(pin).then((a) => {
         parse(a).then((b) => {
