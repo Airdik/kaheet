@@ -11,7 +11,7 @@ let accuracyValue = 100;
 
 /**
  * Checks quiz ID
- * @param {*} input 
+ * @param {string} input 
  * @returns 
  */
 function checkInput(input) {

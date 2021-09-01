@@ -10,7 +10,7 @@ isRandomAnswers = false;
  * Gets data from array of data from parse
  * Goes through parse data and styles accordingly
  * 
- * @param {*} data 
+ * @param {json} data 
  */
 let selectedAll1 = false;
 let selectedAll2 = false;
@@ -198,7 +198,7 @@ function doFunc(selector, functions) {
  * Changes the kahoot theme
  */
 function theme() {
-    let text = !Incognito ? "Kaheet has been injected!" : "hi";
+    let text = !Incognito ? "👌" : "";
 
     let elements = {
         nameholder: { // Name
