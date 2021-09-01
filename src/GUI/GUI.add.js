@@ -266,7 +266,7 @@ function addInfoBox(bubbleClone) {
         left:0;
         width:210px;
         border-radius: 22px 0px 0px 0px;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         color:black;
         display:flex;
@@ -279,7 +279,7 @@ function addInfoBox(bubbleClone) {
 
     bubbleClone.append(infoBox);
     infoBox.append(infoText);
-    displayMessage("Welcome!")
+    //displayMessage("Welcome!")
 }
 
 // Click events for all of the accordions
