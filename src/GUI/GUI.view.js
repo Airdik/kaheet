@@ -4,6 +4,7 @@ function viewModes() {
     displayMessage("Choose a mode any mode!")
     addModes();
 }
+
 function viewInfo() {
     displayMessage("Thanks for using Kheet!");
     clearMainDiv();
@@ -11,6 +12,7 @@ function viewInfo() {
     mainDiv.style.overflowX = "hidden";
     mainDiv.style.overflowY = "scroll";
 
+    // Information about Kaheet and how to use it
     mainDiv.innerHTML =
         `<h1 style="font-weight:bold; text-align:center;">
             Kaheet is a free kahoot cheat originally by <a style="color:#0000EE;" href="https://github.com/pxtrez" target="_blank">pxtrez</a>
@@ -56,6 +58,7 @@ function viewInfo() {
     
     addSecondaryButton("👈", askForPin);
 }
+
 function viewAllQnA() {
     displayMessage("All of the answers are below.")
     clearMainDiv();
@@ -63,14 +66,11 @@ function viewAllQnA() {
 
     addSecondaryButton("👈", viewModes);
 
-
-
-
     mainDiv.style.overflowY = "auto";
-    // parse json DATA
+    // Loping through json data and adding it to the page
     for (let i = 0; i < json.length; i++) {
-        let Q = json[i]["question"].substring(0, 28);
-        let A = json[i]["answers"];
+        let Q = json[i]["question"].substring(0, 28); // Question at index i
+        let A = json[i]["answers"]; // Answer at index i
         let qnaText = document.createElement("p");
         qnaText.className = "qnaText";
         qnaText.innerHTML = `<p style="font-weight:bold">${i + 1}) ${Q}...</p><p>${A}</p>`;
@@ -78,9 +78,6 @@ function viewAllQnA() {
 
         mainDiv.append(qnaText);
     }
-
-
-    // Style by class name here
 
 }
 

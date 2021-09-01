@@ -43,17 +43,17 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/src/Run.js")
 
 ![image](./docs/chooseModes.png)
 
-7. You can also view all of the correct answers in by clicking 📑
+7. You can also view all of the correct answers by clicking 📑
 
 ![image](./docs/viewAllAnswers.png)
 
 
 8. Once you are playing
     - Wrong answers should be darker than the correct ones.
-    
+
     ![image](./docs/example.png)
 
-    - In Incognito mode the correct answers box corner will be slightly rounded then the rest ![image](./docs/exampleRoundCorners.png) 
+    - In Incognito mode the correct answer(s) box corner will be slightly rounder then the rest ![image](./docs/exampleRoundCorners.png) 
         * When you hover over the correct answer(s) your cursor symbol should be loading. ![image](./docs/exampleCorrectCursor.png)
         * In Incognito mode when you hover over wrong answers your cursor symbol will be a not-allowed symbol. ![image](./docs/exampleIncorrectCursor.png)
 
@@ -67,7 +67,7 @@ fetch("https://raw.githubusercontent.com/EShrestha/kaheet/main/Test/testRunner.j
 .then((b) => eval(b)
 .then((c) => eval(c))))
 ```
-- Kheet should be working fine if all tests pass.
+- Kaheet should be working fine if all tests pass.
     * Ignore the red errors chrome throws, as long as all of the tests are green you're good. 
 
 ## Bugs

@@ -167,6 +167,8 @@ function expandBubble() {
         addSecondaryButton("❔", viewInfo);
     }
 }
+
+// Called when any toggle is clicked
 function checkToggles(e) {
     let id = e.target.id;
     switch (id) {
@@ -185,6 +187,8 @@ function checkToggles(e) {
             
     }
 }
+
+// Called when any slider is moved
 function checkSlider(e){
     let target = e.target;
     target.nextSibling.innerText = target.value;
@@ -201,6 +205,8 @@ function checkSlider(e){
             break;
     }
 }
+
+// Called when user has not entered a valid quiz id
 function askForPin() {
     clearMainDiv();
     let mainDiv = document.getElementById('mainDiv');
@@ -267,31 +273,45 @@ function askForPin() {
 
     bubbleClone.append(mainDiv);
 }
+
+// Called when user tries to submit a quiz id
 function validatePin() {
     let pin = document.getElementById("inputBox").value;
 
+    // Checking if user actually entered something
     if (pin == undefined || pin == null) { displayMessage("Enter an ID first!", true); return;}
 
     checkInput(pin).then((a) => {
         parse(a).then((b) => {
+            // In here means the id is valid
             isPublic = true;
             json = b;
             highlight(json);
             viewModes();
         }).catch((e) => { displayMessage(e, true) });
-        // Pin is valid
+        
     })
     .catch((e) => { displayMessage(e, true) });
 }
+
+/**
+ * 
+ * @param {string} message the message to display to the user
+ * @param {boolean} error if it a error message, set this true to make the text red
+ */
 function displayMessage(message, error = false) {
     let infoDiv = document.getElementById("infoText");
     infoDiv.style.color = error ? "red" : "black";
     infoDiv.innerHTML = message;
 }
+
+// Clears the current page contents
 function clearMainDiv() {
     let mainDiv = document.getElementById("mainDiv");
     mainDiv.innerHTML = "";
 }
+
+// Closed the GUI
 function closeBubble() {
     expand = false;
 
@@ -301,18 +321,20 @@ function closeBubble() {
     bubble.style.opacity = Incognito ? 0 : 1;
 }
 
-
-var lastTime = new Date().getSeconds();
+// Listening for ctrl+shift click
+var lastTime = new Date().getSeconds(); // To make sure the bubble is opened/closed 1 second apart
 window.addEventListener('keydown', (event) => {
     
     if (event.ctrlKey && event.key === `Shift`) {
         let currentTime = new Date().getSeconds();
         let difference = currentTime - lastTime;
 
-        if (!(difference > 1)) { if (difference < 0) { currentTime = 0; lastTime = 1;} return; }
+        if (!(difference > 1)) { if (difference < 0) { currentTime = 0; lastTime = 1;} return; } // Making sure it has been at least 1 second since the last time the bubble was opened/closed
 
 
         lastTime = new Date().getSeconds();
+
+        // Open if it is currently closed and close if it is currently open
         if (!expand) {
             expandBubble();
         } else {

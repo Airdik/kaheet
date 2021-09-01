@@ -2,16 +2,22 @@ var speedSliderValue = "0";
 var accuracySliderValue = "100";
 
 
-// ADDs
+///// Adding things to the GUI /////
+
 function addModes() {
     addSecondaryButton("📑", viewAllQnA);
     addSwitch(mainDiv, "Incognito");
-    addSwitch(mainDiv, "Shuffle");
+    //addSwitch(mainDiv, "Shuffle");
     addAccordion(mainDiv, "Autopilot");
     addAccordClickEvents();
     addAccordStyling();
     addSwitchStyling();
 }
+
+/**
+ * @param {div} mainDiv the current page
+ * @param {string} name name of the mode to add
+ */
 function addSwitch(mainDiv, name) {
     let switchDiv = document.createElement('div');
     switchDiv.className = "switch";
@@ -26,20 +32,25 @@ function addSwitch(mainDiv, name) {
     toggleBtn.className = "toggleBtn";
     toggleBtn.type = "checkbox";
 
-
+    //When the modes page is opened, the toggle should be set to what it was previously
     if (Incognito && name === "Incognito") { toggleBtn.checked = true; }
 
-
+    // Adding event listener to all of the toggles
     toggleBtn.addEventListener('change', checkToggles);
 
-
+    // Adding name and toggle to the switch, then adding the switch to the page
     switchDiv.appendChild(switchText);
     switchDiv.appendChild(toggleBtn);
-
     mainDiv.appendChild(switchDiv);
 }
+
+/**
+ * Styling all of the switches
+ */
 function addSwitchStyling() {
-    let switches = document.getElementsByClassName("switch");
+    let switches = document.getElementsByClassName("switch"); // Getting all switches in the page
+
+    // Styling every switch
     let i = 0;
     for (i; i < switches.length; i++) {
         switches[i].style.backgroundColor = "#fff";
@@ -49,6 +60,7 @@ function addSwitchStyling() {
         switches[i].style.borderBottom = "solid gray 1px";
     }
 
+    // Styling every switch text
     let switchTexts = document.getElementsByClassName("switchText");
     for (i = 0; i < switchTexts.length; i++) {
         switchTexts[i].style.display = "inline";
@@ -56,12 +68,19 @@ function addSwitchStyling() {
 
     }
 
+    // Styling ever switch toggle
     let toggleBtns = document.getElementsByClassName("toggleBtn");
     for (i = 0; i < toggleBtns.length; i++) {
         toggleBtns[i].style.float = "right";
         toggleBtns[i].style.marginRight = "1em";
     }
 }
+
+/**
+ * 
+ * @param {div} mainDiv the current page
+ * @param {string} name name of the mode to add
+ */
 function addAccordion(mainDiv, name) {
     let accord = document.createElement('div');
     accord.className = "accordion";
@@ -81,17 +100,21 @@ function addAccordion(mainDiv, name) {
     toggleBtn.type = "checkbox";
 
 
+    //When the modes page is opened, the toggle should be set to what it was previously
     if (Autopilot && name === "Autopilot") { toggleBtn.checked = true; }
 
 
+    // Adding event listener to all of the toggles
     toggleBtn.addEventListener('change', checkToggles);
 
+
+    // Adding the name, toggle, and panel to the accordion then adding the according to the page
     accord.appendChild(accordText);
     accord.appendChild(toggleBtn);
     accord.appendChild(panel);
-
     mainDiv.appendChild(accord);
 }
+
 function addPanelContent(panel) {
     let speed = document.createElement("div");
     speed.id = "speedPanelContent";
@@ -141,14 +164,21 @@ function addPanelContent(panel) {
     panel.appendChild(speed);
     panel.appendChild(accuracy);
 }
+
+/**
+ * 
+ * @param {emoji} icon the icon that is shown on the page
+ * @param {function} onClickFunc 
+ */
 function addSecondaryButton(icon, onClickFunc) {
     let bubbleClone = document.getElementById("bubbleClone");
     let secondaryButton = document.getElementById("secondaryButton");
-    //inside of create list box
+    // Inside of create list box
     if (secondaryButton) {
         secondaryButton.remove();
     }
 
+    // 
     secondaryButton = document.createElement("div");
     secondaryButton.id = "secondaryButton";
     secondaryButton.innerHTML = `${icon}`;
@@ -174,6 +204,8 @@ function addSecondaryButton(icon, onClickFunc) {
     bubbleClone.append(secondaryButton);
 
 }
+
+// Button to close the gui when clicked
 function addMinimizeButton(bubbleClone) {
     let button = document.createElement('div');
     button.innerHTML = "❌";
@@ -245,12 +277,12 @@ function addInfoBox(bubbleClone) {
         `
     );
 
-
-
     bubbleClone.append(infoBox);
     infoBox.append(infoText);
     displayMessage("Welcome!")
 }
+
+// Click events for all of the accordions
 function addAccordClickEvents() {
     let accords = document.getElementsByClassName("accordText");
     let i = 0;
@@ -267,6 +299,8 @@ function addAccordClickEvents() {
         });
     }
 }
+
+// Styling all of th accordions
 function addAccordStyling() {
     let accords = document.getElementsByClassName("accordion");
     let accordTexts = document.getElementsByClassName("accordText");

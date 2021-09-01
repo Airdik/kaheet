@@ -74,8 +74,6 @@ async function testBubbleCreation() {
     });
 }
 
-
-
 async function testMainPageCreation() {
     expandBubble();
     return new Promise(function (resolve, reject) {
@@ -101,7 +99,7 @@ async function testModesPageCreation() {
 
 
 
-//////////             //////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 async function TEST(func) {
 

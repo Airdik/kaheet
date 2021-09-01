@@ -1,14 +1,12 @@
 let quizType;
-//Modes
+// Modes
 let Incognito = true;
 let Shuffle = false;
 let Autopilot = false;
-let Theme = false;
+
+// Global Variables
 let speedValue = 0;
 let accuracyValue = 100;
-
-
-
 
 /**
  * Checks quiz ID
@@ -19,7 +17,7 @@ function checkInput(input) {
     return new Promise(async(resolve, reject) => {
         const kahoot = await fetch(`https://kahoot.it/rest/kahoots/${input}`); // Trying to find the Kahoot game by input (Game ID)
 
-        if(kahoot.status === 403) { return reject("Can't run Kheet on private games.")}
+        if(kahoot.status === 403) { return reject("Can't run Kaheet on private games.")}
         if (!kahoot.ok || kahoot.status === 400) { // Checking if the fetch is not ok
             const challenge = await fetch(`https://kahoot.it/rest/challenges/${input}/answers`);
             const json = await challenge.json();
@@ -29,7 +27,7 @@ function checkInput(input) {
                 return reject('Quiz not found, make sure the ID is correct.');
             }
             if (challenge.status === 403) {
-                reject("Can't run Kheet on private games.")
+                reject("Can't run Kaheet on private games.")
             } else {
                 quizType = "challenge";
                 resolve(json.challenge.kahoot);
@@ -40,9 +38,6 @@ function checkInput(input) {
         }
     });
 }
-
-
-
 
 // -------------------------- parse -------------------------- //
 /**
@@ -108,12 +103,6 @@ function checkInput(input) {
     });
 }
 
-
-
-
-
-
-
 // -------------------------- pause -------------------------- //
 /**
  * Alerts the user they paused the game timer
@@ -123,14 +112,6 @@ function checkInput(input) {
 Remember, that teacher can see illegal time!
 To resume, click 'OK' below`)
 }
-
-
-
-
-
-
-
-
 
 // -------------------------- init -------------------------- //
 /**
