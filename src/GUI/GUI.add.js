@@ -279,7 +279,7 @@ function addInfoBox(bubbleClone) {
 
     bubbleClone.append(infoBox);
     infoBox.append(infoText);
-    //displayMessage("Welcome!")
+    displayMessage("👋")
 }
 
 // Click events for all of the accordions

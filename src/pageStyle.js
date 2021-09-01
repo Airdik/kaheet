@@ -173,7 +173,6 @@ function doFunc(selector, functions) {
         main = "black";
         text = "white";
         //background = "url('https://gifimage.net/wp-content/uploads/2017/09/black-and-white-gif-background-tumblr-7.gif')"; // original
-        background = "url('https://c.tenor.com/-fxcnx6aTbkAAAAM/hehe-eyes.gif')";
         border = "solid yellow 10px";
     } else {
         main = "white";

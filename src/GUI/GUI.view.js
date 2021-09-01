@@ -60,7 +60,7 @@ function viewInfo() {
 }
 
 function viewAllQnA() {
-    displayMessage("All of the answers are below.")
+    displayMessage("All answers are below")
     clearMainDiv();
     let mainDiv = document.getElementById("mainDiv");
 
