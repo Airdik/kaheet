@@ -9,7 +9,7 @@
 ## Overview
 
 Kaheet is a free kahoot cheat originally by [pxtrez](https://github.com/pxtrez)
-Implemented GUI and modes by [Airdik](https://github.com/EShrestha) and [Ratel](https://github.com/Ratel8989)
+Implemented GUI and modes by [Airdik](https://github.com/Airdik) and [Ratel](https://github.com/Ratel8989)
 
 - [How to use](#how-to-use)
     * [Cheat](#Cheat)

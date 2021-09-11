@@ -9,7 +9,7 @@ var expand = false;
 function createBubble() {
 
     // Close the console automatically
-    window.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'f12' }));
+    // window.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'f12' }));
 
     var bubble = document.createElement(`div`); // Main bubble div
     bubble.id = "bubble"; // Giving div an id
@@ -18,7 +18,7 @@ function createBubble() {
     bubbleText.appendChild(document.createTextNode(`👀`)); // Adding text to the p tag
 
     // Styling the bubble, <div>
-    //TEMP: Kahoot color: #46178f
+    // TEMP: Kahoot color: #46178f
     bubble.setAttribute(`style`,
         `background-color:#ffde34;
     height: 50px;

@@ -21,7 +21,7 @@ function viewInfo() {
         <br>
 
         <h1 style="font-weight:bold; text-align:center;">
-            Modified by <a style="color:#0000EE;" href="https://github.com/EShrestha" target="_blank">Airdik</a> and <a style="color:#0000EE;" href="https://github.com/Ratel8989" target="_blank">Ratel</a>
+            Modified by <a style="color:#0000EE;" href="https://github.com/Airdik" target="_blank">Airdik</a> and <a style="color:#0000EE;" href="https://github.com/Ratel8989" target="_blank">Ratel</a>
         </h1>
         
         <br>
