@@ -217,6 +217,8 @@ function askForPin() {
     let inputBox = document.createElement('input');
     let tryButton = document.createElement('button');
     let bubbleClone = document.getElementById('bubbleClone');
+    let moreInfo = document.createElement('h2');
+    moreInfo.id = "moreInfo";
     inputBox.id = "inputBox";
     tryButton.id = "tryButton";
     tryButton.innerHTML = "Connect";
@@ -264,14 +266,22 @@ function askForPin() {
     `
     );
 
+    moreInfo.setAttribute(`style`,
+        `
+        margin-top: 20px;
+        `
+    )
+
     inputBox.placeholder = "Quiz ID"
     displayMessage("Enter Quiz ID below");
+    moreInfo.innerHTML = `Step-by-step instructions <a href="https://github.com/Airdik/kaheet#how-to-use">here</a>`;
 
     tryButton.addEventListener("mouseover", (e) => { tryButton.style.cursor = "pointer"; });
     tryButton.addEventListener("click", validatePin);
 
     mainDiv.append(inputBox);
-    mainDiv.append(tryButton)
+    mainDiv.append(tryButton);
+    mainDiv.append(moreInfo);
 
     addSecondaryButton("❔", viewInfo);
 
