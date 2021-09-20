@@ -21,7 +21,7 @@ To use the cheat, simply copy [script](#Cheat) then paste it into the browsers c
 
 ### Cheat
 
-#### * *Skip steps 1 and 2 if you ran Kaheet form the <a href="https://chrome.google.com/webstore/detail/clique/nbafoaenjgkjlailomhmjofnbkjeickb" target="_blank">Clique</a> extension.* *
+#### ***__Skip steps 1 and 2 if you ran Kaheet form the <a href="https://chrome.google.com/webstore/detail/clique/nbafoaenjgkjlailomhmjofnbkjeickb" target="_blank">Clique</a> extension.__***
 1. Join Kahoot Game
 2. Open browser console <kbd>F12</kbd> and paste the script from below:
 
