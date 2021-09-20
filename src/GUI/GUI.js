@@ -270,6 +270,7 @@ function askForPin() {
         `
         margin-top: 90px;
         text-align: center;
+        font-weight: bold;
         `
     )
 
